@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piljetter", "Piljetter\Piljetter.csproj", "{7AEA9E95-F3DD-4658-996E-1B0F1A45605C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary", "ClassLibrary\ClassLibrary.csproj", "{7CCD90A3-9BD2-4A6A-8D8C-7BEF9FB41851}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7AEA9E95-F3DD-4658-996E-1B0F1A45605C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AEA9E95-F3DD-4658-996E-1B0F1A45605C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AEA9E95-F3DD-4658-996E-1B0F1A45605C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CCD90A3-9BD2-4A6A-8D8C-7BEF9FB41851}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CCD90A3-9BD2-4A6A-8D8C-7BEF9FB41851}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CCD90A3-9BD2-4A6A-8D8C-7BEF9FB41851}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CCD90A3-9BD2-4A6A-8D8C-7BEF9FB41851}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
