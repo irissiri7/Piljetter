@@ -25,7 +25,9 @@ namespace Piljetter
 
         private void search_concertBtn_Click(object sender, EventArgs e)
         {
-
+            Form3 frm3 = new Form3();
+            this.Hide();
+            frm3.Show();
         }
     }
 }

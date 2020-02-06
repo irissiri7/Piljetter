@@ -38,9 +38,7 @@
             this.countryTxt = new System.Windows.Forms.TextBox();
             this.cityTxt = new System.Windows.Forms.TextBox();
             this.searchBtn = new System.Windows.Forms.Button();
-            this.showAllBtn = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
@@ -50,9 +48,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(34, 46);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(275, 25);
+            this.label1.Size = new System.Drawing.Size(171, 25);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Choose your search criterias...";
+            this.label1.Text = "Add optional filters";
             // 
             // artistLbl
             // 
@@ -128,22 +126,13 @@
             // 
             // searchBtn
             // 
-            this.searchBtn.Location = new System.Drawing.Point(39, 403);
+            this.searchBtn.Location = new System.Drawing.Point(39, 453);
             this.searchBtn.Name = "searchBtn";
-            this.searchBtn.Size = new System.Drawing.Size(143, 73);
+            this.searchBtn.Size = new System.Drawing.Size(382, 106);
             this.searchBtn.TabIndex = 14;
             this.searchBtn.Text = "Search";
             this.searchBtn.UseVisualStyleBackColor = true;
             this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
-            // 
-            // showAllBtn
-            // 
-            this.showAllBtn.Location = new System.Drawing.Point(39, 554);
-            this.showAllBtn.Name = "showAllBtn";
-            this.showAllBtn.Size = new System.Drawing.Size(143, 73);
-            this.showAllBtn.TabIndex = 15;
-            this.showAllBtn.Text = "Show all";
-            this.showAllBtn.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -154,16 +143,6 @@
             this.label6.Size = new System.Drawing.Size(53, 25);
             this.label6.TabIndex = 16;
             this.label6.Text = "Date";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(34, 506);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(278, 25);
-            this.label7.TabIndex = 18;
-            this.label7.Text = "Or show all upcoming concerts";
             // 
             // dateTimePicker1
             // 
@@ -179,9 +158,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(480, 650);
             this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.showAllBtn);
             this.Controls.Add(this.searchBtn);
             this.Controls.Add(this.cityTxt);
             this.Controls.Add(this.countryTxt);
@@ -211,9 +188,7 @@
         private System.Windows.Forms.TextBox countryTxt;
         private System.Windows.Forms.TextBox cityTxt;
         private System.Windows.Forms.Button searchBtn;
-        private System.Windows.Forms.Button showAllBtn;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }

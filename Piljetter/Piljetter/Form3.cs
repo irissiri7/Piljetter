@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClassLibrary;
 
 namespace Piljetter
 {
@@ -15,17 +16,22 @@ namespace Piljetter
         public Form3()
         {
             InitializeComponent();
-            dateTimePicker1.CustomFormat = "dd/mm/yyyy";
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            //dateTimePicker1.CustomFormat = "dd/mm/yyyy";
+            //dateTimePicker1.Format = DateTimePickerFormat.Custom;
         }
 
         private void searchBtn_Click(object sender, EventArgs e)
         {
-            string artist = artistLbl.Text;
-            string scene = sceneTxt.Text;
-            string country = countryTxt.Text;
-            string city = cityTxt.Text;
-            DateTime date = dateTimePicker1.Value;
+            //string artist = artistLbl.Text;
+            //string scene = sceneTxt.Text;
+            //string country = countryTxt.Text;
+            //string city = cityTxt.Text;
+            ////DateTime date = dateTimePicker1.Value;
+
+            List<Concert> concerts = SearchEngine.SearchAllConcerts();
+            Form4 frm4 = new Form4(concerts);
+            this.Hide();
+            frm4.Show();
         }
     }
 }

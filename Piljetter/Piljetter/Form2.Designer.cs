@@ -97,7 +97,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(837, 638);
+            this.ClientSize = new System.Drawing.Size(491, 638);
             this.Controls.Add(this.Pesetas);
             this.Controls.Add(this.Name);
             this.Controls.Add(this.Refill_pesetasBtn);
