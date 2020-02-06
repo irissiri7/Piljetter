@@ -74,6 +74,7 @@
             this.Register.TabIndex = 3;
             this.Register.Text = "Register";
             this.Register.UseVisualStyleBackColor = true;
+            this.Register.Click += new System.EventHandler(this.Register_Click);
             // 
             // Nametxt
             // 
@@ -100,7 +101,7 @@
             this.Controls.Add(this.LogIn);
             this.Controls.Add(this.Password);
             this.Controls.Add(this.Name);
-            //this.Name = "SignIn";
+            //this.Name = "Sign In";
             this.Text = "Sign in";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
