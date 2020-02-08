@@ -1,6 +1,6 @@
 ﻿namespace Piljetter
 {
-    partial class Form3
+    partial class Search
     {
         /// <summary>
         /// Required designer variable.

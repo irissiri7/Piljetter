@@ -1,6 +1,6 @@
 ﻿namespace Piljetter
 {
-    partial class Form2
+    partial class MyPage
     {
         /// <summary>
         /// Required designer variable.
@@ -54,6 +54,7 @@
             this.My_purchasesBtn.TabIndex = 2;
             this.My_purchasesBtn.Text = "My purchases";
             this.My_purchasesBtn.UseVisualStyleBackColor = true;
+            this.My_purchasesBtn.Click += new System.EventHandler(this.My_purchasesBtn_Click);
             // 
             // My_CouponsBtn
             // 
@@ -63,6 +64,7 @@
             this.My_CouponsBtn.TabIndex = 3;
             this.My_CouponsBtn.Text = "My coupons";
             this.My_CouponsBtn.UseVisualStyleBackColor = true;
+            this.My_CouponsBtn.Click += new System.EventHandler(this.My_CouponsBtn_Click);
             // 
             // Refill_pesetasBtn
             // 
@@ -72,6 +74,7 @@
             this.Refill_pesetasBtn.TabIndex = 4;
             this.Refill_pesetasBtn.Text = "Refill pesetas";
             this.Refill_pesetasBtn.UseVisualStyleBackColor = true;
+            this.Refill_pesetasBtn.Click += new System.EventHandler(this.Refill_pesetasBtn_Click);
             // 
             // Name
             // 
@@ -93,7 +96,7 @@
             this.Pesetas.TabIndex = 6;
             this.Pesetas.Text = "label2";
             // 
-            // Form2
+            // MyPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -104,7 +107,7 @@
             this.Controls.Add(this.My_CouponsBtn);
             this.Controls.Add(this.My_purchasesBtn);
             this.Controls.Add(this.search_concertBtn);
-            //this.Name = "Form2";
+            //this.Name = "MyPage";
             this.Text = "My page";
             this.ResumeLayout(false);
             this.PerformLayout();

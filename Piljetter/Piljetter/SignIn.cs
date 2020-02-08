@@ -43,7 +43,7 @@ namespace Piljetter
                 {
                     this.Hide();
                     MessageBox.Show($"Welcome {customer[0].Name}");
-                    Form2 frm2 = new Form2(customer[0]);
+                    MyPage frm2 = new MyPage(customer[0]);
                     frm2.Show();
                 }
             }

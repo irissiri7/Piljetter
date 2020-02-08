@@ -11,11 +11,11 @@ using ClassLibrary;
 
 namespace Piljetter
 {
-    public partial class Form3 : Form
+    public partial class Search : Form
     {
         public Customer CurrentCustomer { get; set; }
 
-        public Form3(Customer currentCustomer)
+        public Search(Customer currentCustomer)
         {
             InitializeComponent();
             CurrentCustomer = currentCustomer;
@@ -32,7 +32,7 @@ namespace Piljetter
             ////DateTime date = dateTimePicker1.Value;
 
             List<SearchResultConcerts> concerts = SearchEngine.SearchConcerts(artist, scene, country, city);
-            Form4 frm4 = new Form4(CurrentCustomer, concerts);
+            SearchResult frm4 = new SearchResult(CurrentCustomer, concerts);
             this.Hide();
             frm4.Show();
         }

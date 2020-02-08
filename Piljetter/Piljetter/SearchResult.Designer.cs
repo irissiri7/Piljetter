@@ -1,6 +1,6 @@
 ﻿namespace Piljetter
 {
-    partial class Form4
+    partial class SearchResult
     {
         /// <summary>
         /// Required designer variable.

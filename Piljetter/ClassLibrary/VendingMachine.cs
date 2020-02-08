@@ -6,7 +6,7 @@ using Dapper;
 
 namespace ClassLibrary
 {
-    public static class TicketVendingMachine
+    public static class VendingMachine
     {
         private static string ConnectionString { get; set; } = @"Data Source=MS713826\SQLEXPRESS;Initial Catalog=PiljettDb;Integrated Security=True";
 
@@ -36,6 +36,20 @@ namespace ClassLibrary
             catch (SqlException e)
             {
                 success = false;
+            }
+
+            return success;
+        }
+
+        public static bool BuyPesetas(Customer customer, int amountPesetas)
+        {
+            bool success = false;
+            using (var c = new SqlConnection(ConnectionString))
+            {
+                c.Open();
+                string sql = "UPDATE Customers SET Pesetas = Pesetas + @amountPesetas WHERE Id = @Id; ";
+                c.Execute(sql, new { @amountPesetas = amountPesetas, @Id = customer.Id});
+                success = true;
             }
 
             return success;
