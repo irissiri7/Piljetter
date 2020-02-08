@@ -141,8 +141,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary\ClassLibrary.csproj">
-      <Project>{7ccd90a3-9bd2-4a6a-8d8c-7bef9fb41851}</Project>
+    <ProjectReference Include="..\ClassLibraryReborn\ClassLibrary.csproj">
+      <Project>{ce24ae19-f36a-4bc2-ad16-7e7086d03df4}</Project>
       <Name>ClassLibrary</Name>
     </ProjectReference>
   </ItemGroup>
