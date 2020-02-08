@@ -16,7 +16,7 @@ namespace ClassLibrary
             using (var c = new SqlConnection(ConnectionString))
             {
                 c.Open();
-                string sql = "Select c.Id, c.Time, a.Name Artist, s.Name Scene, s.Country, s.City FROM Concerts as c " +
+                string sql = "Select c.Id, c.Time, a.Name Artist, s.Name Scene, s.Country, s.City, c.Available_Tickets AS AvailableTickets FROM Concerts as c " +
                     "INNER JOIN Artists as a ON a.Id = c.Artist_Id " +
                     "INNER JOIN Scenes as s ON s.Id = c.Scene_Id " +
                     "WHERE a.Name LIKE @artist AND s.Name LIKE @scene AND s.Country LIKE @country AND s.City LIKE @city; ";

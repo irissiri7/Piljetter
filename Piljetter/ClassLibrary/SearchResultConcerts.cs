@@ -12,6 +12,7 @@ namespace ClassLibrary
         public string Scene { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
+        public int AvailableTickets { get; set; }
 
     }
 }

@@ -35,6 +35,7 @@ namespace Piljetter
             var concert = Convert.ToInt32(Math.Round(concertId.Value, 0));
 
             bool success = VendingMachine.BuyTickets(CurrentCustomer, tickets, concert);
+            CurrentCustomer = CustomerHandler.SignIn(CurrentCustomer.Name, CurrentCustomer.Password)[0];
             if (success)
             {
                 MessageBox.Show("Tickets bought!");
