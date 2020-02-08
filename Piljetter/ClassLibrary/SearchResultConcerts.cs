@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ClassLibrary
 {
-    public class Concert
+    public class SearchResultConcerts
     {
         public int Id { get; set; }
         public DateTime Time { get; set; }

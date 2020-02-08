@@ -13,23 +13,26 @@ namespace Piljetter
 {
     public partial class Form3 : Form
     {
-        public Form3()
+        public Customer CurrentCustomer { get; set; }
+
+        public Form3(Customer currentCustomer)
         {
             InitializeComponent();
+            CurrentCustomer = currentCustomer;
             //dateTimePicker1.CustomFormat = "dd/mm/yyyy";
             //dateTimePicker1.Format = DateTimePickerFormat.Custom;
         }
 
         private void searchBtn_Click(object sender, EventArgs e)
         {
-            //string artist = artistLbl.Text;
-            //string scene = sceneTxt.Text;
-            //string country = countryTxt.Text;
-            //string city = cityTxt.Text;
+            string artist = artistTxt.Text;
+            string scene = sceneTxt.Text;
+            string country = countryTxt.Text;
+            string city = cityTxt.Text;
             ////DateTime date = dateTimePicker1.Value;
 
-            List<Concert> concerts = SearchEngine.SearchAllConcerts();
-            Form4 frm4 = new Form4(concerts);
+            List<SearchResultConcerts> concerts = SearchEngine.SearchConcerts(artist, scene, country, city);
+            Form4 frm4 = new Form4(CurrentCustomer, concerts);
             this.Hide();
             frm4.Show();
         }

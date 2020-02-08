@@ -13,19 +13,38 @@ namespace Piljetter
 {
     public partial class Form4 : Form
     {
-        public Form4(List<Concert> concerts)
+        public Customer CurrentCustomer { get; set; }
+
+        public Form4(Customer currentCustomer, List<SearchResultConcerts> concerts)
         {
             InitializeComponent();
-            PopulateListbox(concerts);
+            CurrentCustomer = currentCustomer;
+            searchResultTable.DataSource = concerts;
         }
 
-        private void PopulateListbox(List<Concert> concerts)
+        private void BackToMyPageBtn_Click(object sender, EventArgs e)
         {
-            searchResult.Items.Clear();
-            foreach (var c in concerts)
+            Form2 frm2 = new Form2(CurrentCustomer);
+            this.Hide();
+            frm2.Show();
+        }
+
+        private void BuyTicketBtn_Click(object sender, EventArgs e)
+        {
+            var tickets = Convert.ToInt32(Math.Round(numTickets.Value, 0));
+            var concert = Convert.ToInt32(Math.Round(concertId.Value, 0));
+
+            bool success = TicketVendingMachine.BuyTickets(CurrentCustomer, tickets, concert);
+            if (success)
             {
-                searchResult.Items.Add(c.Time + c.Artist + c.Scene + c.Country + c.City);
+                MessageBox.Show("Tickets bought!");
+            }
+            else
+            {
+                MessageBox.Show("Oh, something went wrong...");
             }
         }
+
+        
     }
 }

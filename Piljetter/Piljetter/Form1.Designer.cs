@@ -87,6 +87,7 @@
             // 
             this.Passwordtxt.Location = new System.Drawing.Point(203, 130);
             this.Passwordtxt.Name = "Passwordtxt";
+            this.Passwordtxt.PasswordChar = '*';
             this.Passwordtxt.Size = new System.Drawing.Size(203, 26);
             this.Passwordtxt.TabIndex = 5;
             // 
@@ -101,7 +102,7 @@
             this.Controls.Add(this.LogIn);
             this.Controls.Add(this.Password);
             this.Controls.Add(this.Name);
-            //this.Name = "Sign In";
+            //this.Name = "SignIn";
             this.Text = "Sign in";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);

@@ -28,22 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.searchResult = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.buy_ticketBtn = new System.Windows.Forms.Button();
             this.back_to_my_pageBtn = new System.Windows.Forms.Button();
+            this.searchResultTable = new System.Windows.Forms.DataGridView();
+            this.BackToMyPageBtn = new System.Windows.Forms.Button();
+            this.BuyTicketBtn = new System.Windows.Forms.Button();
+            this.ConcertIdLbl = new System.Windows.Forms.Label();
+            this.amountTicketsLbl = new System.Windows.Forms.Label();
+            this.numTickets = new System.Windows.Forms.NumericUpDown();
+            this.concertId = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.searchResultTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTickets)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.concertId)).BeginInit();
             this.SuspendLayout();
-            // 
-            // searchResult
-            // 
-            this.searchResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.searchResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchResult.FormattingEnabled = true;
-            this.searchResult.ItemHeight = 20;
-            this.searchResult.Location = new System.Drawing.Point(0, 89);
-            this.searchResult.Name = "searchResult";
-            this.searchResult.Size = new System.Drawing.Size(4028, 720);
-            this.searchResult.TabIndex = 0;
             // 
             // label1
             // 
@@ -73,27 +71,127 @@
             this.back_to_my_pageBtn.Text = "Back to my page";
             this.back_to_my_pageBtn.UseVisualStyleBackColor = true;
             // 
+            // searchResultTable
+            // 
+            this.searchResultTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.searchResultTable.Location = new System.Drawing.Point(0, 0);
+            this.searchResultTable.Name = "searchResultTable";
+            this.searchResultTable.RowHeadersWidth = 62;
+            this.searchResultTable.RowTemplate.Height = 28;
+            this.searchResultTable.Size = new System.Drawing.Size(1503, 352);
+            this.searchResultTable.TabIndex = 4;
+            // 
+            // BackToMyPageBtn
+            // 
+            this.BackToMyPageBtn.Location = new System.Drawing.Point(12, 553);
+            this.BackToMyPageBtn.Name = "BackToMyPageBtn";
+            this.BackToMyPageBtn.Size = new System.Drawing.Size(172, 45);
+            this.BackToMyPageBtn.TabIndex = 6;
+            this.BackToMyPageBtn.Text = "Back to my page";
+            this.BackToMyPageBtn.UseVisualStyleBackColor = true;
+            this.BackToMyPageBtn.Click += new System.EventHandler(this.BackToMyPageBtn_Click);
+            // 
+            // BuyTicketBtn
+            // 
+            this.BuyTicketBtn.Location = new System.Drawing.Point(12, 388);
+            this.BuyTicketBtn.Name = "BuyTicketBtn";
+            this.BuyTicketBtn.Size = new System.Drawing.Size(172, 148);
+            this.BuyTicketBtn.TabIndex = 7;
+            this.BuyTicketBtn.Text = "Buy ticket";
+            this.BuyTicketBtn.UseVisualStyleBackColor = true;
+            this.BuyTicketBtn.Click += new System.EventHandler(this.BuyTicketBtn_Click);
+            // 
+            // ConcertIdLbl
+            // 
+            this.ConcertIdLbl.AutoSize = true;
+            this.ConcertIdLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ConcertIdLbl.Location = new System.Drawing.Point(202, 388);
+            this.ConcertIdLbl.Name = "ConcertIdLbl";
+            this.ConcertIdLbl.Size = new System.Drawing.Size(168, 25);
+            this.ConcertIdLbl.TabIndex = 9;
+            this.ConcertIdLbl.Text = "Enter id of concert";
+            // 
+            // amountTicketsLbl
+            // 
+            this.amountTicketsLbl.AutoSize = true;
+            this.amountTicketsLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.amountTicketsLbl.Location = new System.Drawing.Point(202, 448);
+            this.amountTicketsLbl.Name = "amountTicketsLbl";
+            this.amountTicketsLbl.Size = new System.Drawing.Size(175, 25);
+            this.amountTicketsLbl.TabIndex = 10;
+            this.amountTicketsLbl.Text = "How many tickets?";
+            // 
+            // numTickets
+            // 
+            this.numTickets.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numTickets.Location = new System.Drawing.Point(405, 448);
+            this.numTickets.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numTickets.Name = "numTickets";
+            this.numTickets.Size = new System.Drawing.Size(86, 30);
+            this.numTickets.TabIndex = 11;
+            this.numTickets.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // concertId
+            // 
+            this.concertId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.concertId.Location = new System.Drawing.Point(405, 386);
+            this.concertId.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.concertId.Name = "concertId";
+            this.concertId.Size = new System.Drawing.Size(88, 30);
+            this.concertId.TabIndex = 12;
+            this.concertId.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // Form4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(796, 919);
+            this.ClientSize = new System.Drawing.Size(1507, 610);
+            this.Controls.Add(this.concertId);
+            this.Controls.Add(this.numTickets);
+            this.Controls.Add(this.amountTicketsLbl);
+            this.Controls.Add(this.ConcertIdLbl);
+            this.Controls.Add(this.BuyTicketBtn);
+            this.Controls.Add(this.BackToMyPageBtn);
+            this.Controls.Add(this.searchResultTable);
             this.Controls.Add(this.back_to_my_pageBtn);
             this.Controls.Add(this.buy_ticketBtn);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.searchResult);
             this.Name = "Form4";
             this.Text = "Search result";
+            ((System.ComponentModel.ISupportInitialize)(this.searchResultTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTickets)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.concertId)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox searchResult;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buy_ticketBtn;
         private System.Windows.Forms.Button back_to_my_pageBtn;
+        private System.Windows.Forms.DataGridView searchResultTable;
+        private System.Windows.Forms.Button BackToMyPageBtn;
+        private System.Windows.Forms.Button BuyTicketBtn;
+        private System.Windows.Forms.Label ConcertIdLbl;
+        private System.Windows.Forms.Label amountTicketsLbl;
+        private System.Windows.Forms.NumericUpDown numTickets;
+        private System.Windows.Forms.NumericUpDown concertId;
     }
 }
