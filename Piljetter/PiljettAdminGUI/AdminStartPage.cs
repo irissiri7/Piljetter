@@ -25,6 +25,7 @@ namespace PiljettAdminGUI
             List<AvailableScenesView> availableScenes = AdminEngine.GetAvailableScenes();
             AddConcert addConcertForm = new AddConcert(availableArtists, availableScenes);
             addConcertForm.Show();
+            this.Hide();
         }
     }
 }

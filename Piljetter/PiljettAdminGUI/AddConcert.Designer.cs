@@ -34,31 +34,32 @@
             this.label2 = new System.Windows.Forms.Label();
             this.availableArtistsView = new System.Windows.Forms.DataGridView();
             this.availableScenesView = new System.Windows.Forms.DataGridView();
-            this.artistId = new System.Windows.Forms.NumericUpDown();
-            this.sceneId = new System.Windows.Forms.NumericUpDown();
-            this.concertDate = new System.Windows.Forms.DateTimePicker();
+            this.artistIdUpDown = new System.Windows.Forms.NumericUpDown();
+            this.sceneIdUpDown = new System.Windows.Forms.NumericUpDown();
+            this.concertDateSelect = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.availableArtistsView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.availableScenesView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.artistId)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sceneId)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.artistIdUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sceneIdUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // addBtn
             // 
-            this.addBtn.Location = new System.Drawing.Point(12, 316);
+            this.addBtn.Location = new System.Drawing.Point(12, 533);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(120, 49);
             this.addBtn.TabIndex = 0;
             this.addBtn.Text = "Add";
             this.addBtn.UseVisualStyleBackColor = true;
+            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
             // backToMainPage
             // 
-            this.backToMainPage.Location = new System.Drawing.Point(12, 380);
+            this.backToMainPage.Location = new System.Drawing.Point(12, 605);
             this.backToMainPage.Name = "backToMainPage";
             this.backToMainPage.Size = new System.Drawing.Size(120, 49);
             this.backToMainPage.TabIndex = 1;
@@ -77,7 +78,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(415, 225);
+            this.label2.Location = new System.Drawing.Point(415, 357);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(127, 20);
             this.label2.TabIndex = 3;
@@ -90,39 +91,39 @@
             this.availableArtistsView.Name = "availableArtistsView";
             this.availableArtistsView.RowHeadersWidth = 62;
             this.availableArtistsView.RowTemplate.Height = 28;
-            this.availableArtistsView.Size = new System.Drawing.Size(240, 150);
+            this.availableArtistsView.Size = new System.Drawing.Size(679, 270);
             this.availableArtistsView.TabIndex = 4;
             // 
             // availableScenesView
             // 
             this.availableScenesView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.availableScenesView.Location = new System.Drawing.Point(419, 259);
+            this.availableScenesView.Location = new System.Drawing.Point(419, 393);
             this.availableScenesView.Name = "availableScenesView";
             this.availableScenesView.RowHeadersWidth = 62;
             this.availableScenesView.RowTemplate.Height = 28;
-            this.availableScenesView.Size = new System.Drawing.Size(240, 150);
+            this.availableScenesView.Size = new System.Drawing.Size(679, 252);
             this.availableScenesView.TabIndex = 5;
             // 
-            // artistId
+            // artistIdUpDown
             // 
-            this.artistId.Location = new System.Drawing.Point(144, 121);
-            this.artistId.Name = "artistId";
-            this.artistId.Size = new System.Drawing.Size(120, 26);
-            this.artistId.TabIndex = 6;
+            this.artistIdUpDown.Location = new System.Drawing.Point(144, 121);
+            this.artistIdUpDown.Name = "artistIdUpDown";
+            this.artistIdUpDown.Size = new System.Drawing.Size(120, 26);
+            this.artistIdUpDown.TabIndex = 6;
             // 
-            // sceneId
+            // sceneIdUpDown
             // 
-            this.sceneId.Location = new System.Drawing.Point(144, 194);
-            this.sceneId.Name = "sceneId";
-            this.sceneId.Size = new System.Drawing.Size(120, 26);
-            this.sceneId.TabIndex = 7;
+            this.sceneIdUpDown.Location = new System.Drawing.Point(144, 194);
+            this.sceneIdUpDown.Name = "sceneIdUpDown";
+            this.sceneIdUpDown.Size = new System.Drawing.Size(120, 26);
+            this.sceneIdUpDown.TabIndex = 7;
             // 
-            // concertDate
+            // concertDateSelect
             // 
-            this.concertDate.Location = new System.Drawing.Point(144, 259);
-            this.concertDate.Name = "concertDate";
-            this.concertDate.Size = new System.Drawing.Size(200, 26);
-            this.concertDate.TabIndex = 8;
+            this.concertDateSelect.Location = new System.Drawing.Point(144, 259);
+            this.concertDateSelect.Name = "concertDateSelect";
+            this.concertDateSelect.Size = new System.Drawing.Size(200, 26);
+            this.concertDateSelect.TabIndex = 8;
             // 
             // label3
             // 
@@ -164,14 +165,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1110, 666);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.concertDate);
-            this.Controls.Add(this.sceneId);
-            this.Controls.Add(this.artistId);
+            this.Controls.Add(this.concertDateSelect);
+            this.Controls.Add(this.sceneIdUpDown);
+            this.Controls.Add(this.artistIdUpDown);
             this.Controls.Add(this.availableScenesView);
             this.Controls.Add(this.availableArtistsView);
             this.Controls.Add(this.label2);
@@ -182,8 +183,8 @@
             this.Text = "AddConcert";
             ((System.ComponentModel.ISupportInitialize)(this.availableArtistsView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.availableScenesView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.artistId)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sceneId)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.artistIdUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sceneIdUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -197,9 +198,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView availableArtistsView;
         private System.Windows.Forms.DataGridView availableScenesView;
-        private System.Windows.Forms.NumericUpDown artistId;
-        private System.Windows.Forms.NumericUpDown sceneId;
-        private System.Windows.Forms.DateTimePicker concertDate;
+        private System.Windows.Forms.NumericUpDown artistIdUpDown;
+        private System.Windows.Forms.NumericUpDown sceneIdUpDown;
+        private System.Windows.Forms.DateTimePicker concertDateSelect;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;

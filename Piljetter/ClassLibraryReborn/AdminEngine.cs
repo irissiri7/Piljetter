@@ -37,5 +37,35 @@ namespace ClassLibrary
 
         }
 
+        public static bool AddConcert(DateTime time, int sceneId, int artistId)
+        {
+            bool success = true;
+            try
+            {
+                using (var c = new SqlConnection(ConnectionString))
+                {
+                    c.Open();
+                    using (var t = c.BeginTransaction())
+                    {
+                        string sql = "INSERT INTO Concerts(Time, Scene_Id, Artist_Id, Ticket_Price, Available_Tickets, Total_Cost) " +
+                            "VALUES(@time, @sceneId, @artistId, " +
+                            "(SELECT SUM(Popularity) * (100) FROM Artists as a WHERE a.Id = @artistId), " +
+                            "(SELECT Seats FROM Scenes WHERE Scenes.Id = @sceneId), " +
+                            "(SELECT(SELECT SUM(Renome) FROM Scenes AS s WHERE s.Id = @sceneId) * (SELECT SUM(Popularity) * (10000) FROM Artists as a WHERE a.Id = @artistId))); ";
+
+                        c.Execute(sql, new { @time = time, @sceneId = sceneId, @artistId = artistId }, transaction: t);
+                        t.Commit();
+                    }
+
+                }
+            }
+            catch (SqlException e)
+            {
+                success = false;
+            }
+
+            return success;
+        }
+
     }
 }
