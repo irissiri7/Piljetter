@@ -47,5 +47,12 @@ namespace PiljettAdminGUI
 
 
         }
+
+        private void backToMainPage_Click(object sender, EventArgs e)
+        {
+            AdminStartPage start = new AdminStartPage();
+            this.Close();
+            start.Show();
+        }
     }
 }

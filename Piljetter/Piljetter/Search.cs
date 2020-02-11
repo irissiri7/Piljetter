@@ -31,7 +31,7 @@ namespace Piljetter
             string city = cityTxt.Text;
             ////DateTime date = dateTimePicker1.Value;
 
-            List<SearchResultConcerts> concerts = SearchEngine.SearchConcerts(artist, scene, country, city);
+            List<ConcertsView> concerts = SearchEngine.SearchConcertsForCustomer(artist, scene, country, city);
             SearchResult frm4 = new SearchResult(CurrentCustomer, concerts);
             this.Hide();
             frm4.Show();

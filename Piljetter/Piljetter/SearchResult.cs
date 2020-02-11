@@ -15,7 +15,7 @@ namespace Piljetter
     {
         public Customer CurrentCustomer { get; set; }
 
-        public SearchResult(Customer currentCustomer, List<SearchResultConcerts> concerts)
+        public SearchResult(Customer currentCustomer, List<ConcertsView> concerts)
         {
             InitializeComponent();
             CurrentCustomer = currentCustomer;

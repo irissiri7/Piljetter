@@ -45,16 +45,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminEngine.cs" />
-    <Compile Include="AvailableArtistsView.cs" />
-    <Compile Include="AvailableScenesView.cs" />
+    <Compile Include="POCOS\AvailableArtistsView.cs" />
+    <Compile Include="POCOS\AvailableScenesView.cs" />
     <Compile Include="ClientHistoryHandler.cs" />
-    <Compile Include="CouponSummery.cs" />
-    <Compile Include="Customer.cs" />
+    <Compile Include="POCOS\CouponSummeryView.cs" />
+    <Compile Include="POCOS\Customer.cs" />
     <Compile Include="CustomerHandler.cs" />
+    <Compile Include="POCOS\ConcertsViewAdmin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PurchaseHistory.cs" />
+    <Compile Include="POCOS\PurchaseHistoryView.cs" />
     <Compile Include="SearchEngine.cs" />
-    <Compile Include="SearchResultConcerts.cs" />
+    <Compile Include="POCOS\ConcertsViewCustomer.cs" />
     <Compile Include="VendingMachine.cs" />
   </ItemGroup>
   <ItemGroup>

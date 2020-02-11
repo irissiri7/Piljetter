@@ -67,5 +67,41 @@ namespace ClassLibrary
             return success;
         }
 
+        public static bool CancelConcert (string id)
+        {
+            bool success = true;
+            try
+            {
+                using (var c = new SqlConnection(ConnectionString))
+                {
+                    c.Open();
+                    using (var t = c.BeginTransaction())
+                    {
+                        string sql = "WITH x AS (SELECT Customer_Id, SUM(Num_Tickets) as NumberOfTickets, AVG(Ticket_Price_At_Purchase) TicketPriceAtPurchase " +
+                            "FROM Orders AS o " +
+                            "WHERE o.Concert_Id = @id GROUP BY o.Customer_Id) " +
+                            "UPDATE Customers " +
+                            "SET Pesetas = Pesetas + (x.TicketPriceAtPurchase * x.NumberOfTickets) " +
+                            "FROM Customers AS c " +
+                            "INNER JOIN x AS x " +
+                            "ON x.Customer_Id = c.Id; " +
+                            "DELETE FROM Orders WHERE Concert_Id = @id; " +
+                            "DELETE FROM Concerts WHERE Id = @id; ";
+
+                        c.Execute(sql, new { @id = id}, transaction: t);
+                        t.Commit();
+                    }
+
+                }
+            }
+            catch (SqlException e)
+            {
+                success = false;
+            }
+
+            return success;
+
+        }
+
     }
 }
