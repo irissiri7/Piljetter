@@ -67,9 +67,13 @@ namespace ClassLibrary
             return success;
         }
 
-        public static bool CancelConcert (string id)
+        public static bool CancelConcert (string id, bool givecoupons)
         {
             bool success = true;
+            if (givecoupons)
+            {
+                GiveCoupons(id);
+            }
             try
             {
                 using (var c = new SqlConnection(ConnectionString))
@@ -86,12 +90,11 @@ namespace ClassLibrary
                             "INNER JOIN x AS x " +
                             "ON x.Customer_Id = c.Id; " +
                             "DELETE FROM Orders WHERE Concert_Id = @id; " +
-                            "DELETE FROM Concerts WHERE Id = @id; ";
+                            "DELETE FROM Concerts WHERE Id = @id;";
 
                         c.Execute(sql, new { @id = id}, transaction: t);
                         t.Commit();
                     }
-
                 }
             }
             catch (SqlException e)
@@ -99,9 +102,30 @@ namespace ClassLibrary
                 success = false;
             }
 
+
             return success;
+        }
+
+        public static void GiveCoupons(string concertId)
+        {
+            var sql1 = "SELECT DISTINCT o.Customer_Id FROM Concerts AS c " +
+                        "INNER JOIN Orders AS o ON c.Id = o.Concert_Id " +
+                        "WHERE Concert_Id = @concertId;";  
+            
+            var sql2 = "INSERT INTO Coupons(Customer_Id, Expiration_Date) " +
+                       "VALUES(@id, DATEADD(year, 1, GETDATE()));";
+            
+            using (var c = new SqlConnection(ConnectionString))
+            {
+                List<int> customerId= c.Query<int>(sql1, new { @concertId = concertId }).ToList();
+                foreach (int id in customerId)
+                {
+                    c.Execute(sql2, new { @id = id });
+                }
+            }
 
         }
+
 
     }
 }

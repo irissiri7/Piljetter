@@ -19,8 +19,10 @@ namespace Piljetter
         {
             InitializeComponent();
             CurrentCustomer = currentCustomer;
-            //dateTimePicker1.CustomFormat = "dd/mm/yyyy";
-            //dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateFrom.CustomFormat = "yyyy-mm-dd";
+            //dateFrom.Format = DateTimePickerFormat.Custom;
+            dateTo.CustomFormat = "yyyy-mm-dd";
+            //dateTo.Format = DateTimePickerFormat.Custom;
         }
 
         private void searchBtn_Click(object sender, EventArgs e)
@@ -29,9 +31,11 @@ namespace Piljetter
             string scene = sceneTxt.Text;
             string country = countryTxt.Text;
             string city = cityTxt.Text;
-            ////DateTime date = dateTimePicker1.Value;
+            DateTime dFrom = dateFrom.Value;
+            DateTime dTo = dateTo.Value;
 
-            List<ConcertsView> concerts = SearchEngine.SearchConcertsForCustomer(artist, scene, country, city);
+
+            List<ConcertsView> concerts = SearchEngine.SearchConcertsForCustomer(artist, scene, country, city, dFrom, dTo);
             SearchResult frm4 = new SearchResult(CurrentCustomer, concerts);
             this.Hide();
             frm4.Show();

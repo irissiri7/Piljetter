@@ -39,7 +39,9 @@
             this.cityTxt = new System.Windows.Forms.TextBox();
             this.searchBtn = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateFrom = new System.Windows.Forms.DateTimePicker();
+            this.dateTo = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -126,7 +128,7 @@
             // 
             // searchBtn
             // 
-            this.searchBtn.Location = new System.Drawing.Point(39, 453);
+            this.searchBtn.Location = new System.Drawing.Point(39, 489);
             this.searchBtn.Name = "searchBtn";
             this.searchBtn.Size = new System.Drawing.Size(382, 106);
             this.searchBtn.TabIndex = 14;
@@ -140,24 +142,44 @@
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(34, 348);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 25);
+            this.label6.Size = new System.Drawing.Size(57, 25);
             this.label6.TabIndex = 16;
-            this.label6.Text = "Date";
+            this.label6.Text = "From";
             // 
-            // dateTimePicker1
+            // dateFrom
             // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(140, 348);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(281, 30);
-            this.dateTimePicker1.TabIndex = 19;
+            this.dateFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateFrom.Location = new System.Drawing.Point(140, 348);
+            this.dateFrom.Name = "dateFrom";
+            this.dateFrom.Size = new System.Drawing.Size(281, 30);
+            this.dateFrom.TabIndex = 19;
             // 
-            // Form3
+            // dateTo
+            // 
+            this.dateTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTo.Location = new System.Drawing.Point(140, 402);
+            this.dateTo.Name = "dateTo";
+            this.dateTo.Size = new System.Drawing.Size(281, 30);
+            this.dateTo.TabIndex = 20;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(37, 402);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(36, 25);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "To";
+            // 
+            // Search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(480, 650);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.dateTo);
+            this.Controls.Add(this.dateFrom);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.searchBtn);
             this.Controls.Add(this.cityTxt);
@@ -169,7 +191,7 @@
             this.Controls.Add(this.artistTxt);
             this.Controls.Add(this.artistLbl);
             this.Controls.Add(this.label1);
-            this.Name = "Form3";
+            this.Name = "Search";
             this.Text = "Search concert";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -189,6 +211,8 @@
         private System.Windows.Forms.TextBox cityTxt;
         private System.Windows.Forms.Button searchBtn;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateFrom;
+        private System.Windows.Forms.DateTimePicker dateTo;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -143,6 +143,11 @@
             // 
             this.concertId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.concertId.Location = new System.Drawing.Point(405, 386);
+            this.concertId.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.concertId.Minimum = new decimal(new int[] {
             1,
             0,
@@ -157,7 +162,7 @@
             0,
             0});
             // 
-            // Form4
+            // SearchResult
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -172,7 +177,7 @@
             this.Controls.Add(this.back_to_my_pageBtn);
             this.Controls.Add(this.buy_ticketBtn);
             this.Controls.Add(this.label1);
-            this.Name = "Form4";
+            this.Name = "SearchResult";
             this.Text = "Search result";
             ((System.ComponentModel.ISupportInitialize)(this.searchResultTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTickets)).EndInit();
