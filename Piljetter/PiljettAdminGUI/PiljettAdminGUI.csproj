@@ -58,6 +58,12 @@
     <Compile Include="AdminStartPage.Designer.cs">
       <DependentUpon>AdminStartPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="ConcertsOverview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConcertsOverview.Designer.cs">
+      <DependentUpon>ConcertsOverview.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Statistics.cs">
@@ -71,6 +77,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AdminStartPage.resx">
       <DependentUpon>AdminStartPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConcertsOverview.resx">
+      <DependentUpon>ConcertsOverview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

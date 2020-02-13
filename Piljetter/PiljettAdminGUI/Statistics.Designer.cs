@@ -28,71 +28,118 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.statisticsView = new System.Windows.Forms.DataGridView();
+            this.topArtistsBtn = new System.Windows.Forms.Button();
+            this.couponOverviewBtn = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.statisticsView)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // statisticsView
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(473, 31);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(546, 626);
-            this.dataGridView1.TabIndex = 0;
+            this.statisticsView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.statisticsView.Location = new System.Drawing.Point(473, 89);
+            this.statisticsView.Name = "statisticsView";
+            this.statisticsView.RowHeadersWidth = 62;
+            this.statisticsView.RowTemplate.Height = 28;
+            this.statisticsView.Size = new System.Drawing.Size(546, 568);
+            this.statisticsView.TabIndex = 0;
             // 
-            // button1
+            // topArtistsBtn
             // 
-            this.button1.Location = new System.Drawing.Point(64, 22);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(294, 90);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.topArtistsBtn.Location = new System.Drawing.Point(73, 176);
+            this.topArtistsBtn.Name = "topArtistsBtn";
+            this.topArtistsBtn.Size = new System.Drawing.Size(294, 90);
+            this.topArtistsBtn.TabIndex = 1;
+            this.topArtistsBtn.Text = "Top Concerts";
+            this.topArtistsBtn.UseVisualStyleBackColor = true;
+            this.topArtistsBtn.Click += new System.EventHandler(this.topArtistsBtn_Click);
             // 
-            // button2
+            // couponOverviewBtn
             // 
-            this.button2.Location = new System.Drawing.Point(64, 147);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(294, 84);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.couponOverviewBtn.Location = new System.Drawing.Point(73, 296);
+            this.couponOverviewBtn.Name = "couponOverviewBtn";
+            this.couponOverviewBtn.Size = new System.Drawing.Size(294, 84);
+            this.couponOverviewBtn.TabIndex = 2;
+            this.couponOverviewBtn.Text = "Coupon overview";
+            this.couponOverviewBtn.UseVisualStyleBackColor = true;
+            this.couponOverviewBtn.Click += new System.EventHandler(this.passedConcertsOverviewBtn_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(64, 280);
+            this.button3.Location = new System.Drawing.Point(73, 419);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(294, 87);
             this.button3.TabIndex = 3;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
             // 
+            // dateTimePickerFrom
+            // 
+            this.dateTimePickerFrom.Location = new System.Drawing.Point(167, 89);
+            this.dateTimePickerFrom.Name = "dateTimePickerFrom";
+            this.dateTimePickerFrom.Size = new System.Drawing.Size(200, 26);
+            this.dateTimePickerFrom.TabIndex = 4;
+            // 
+            // dateTimePickerTo
+            // 
+            this.dateTimePickerTo.Location = new System.Drawing.Point(167, 130);
+            this.dateTimePickerTo.Name = "dateTimePickerTo";
+            this.dateTimePickerTo.Size = new System.Drawing.Size(200, 26);
+            this.dateTimePickerTo.TabIndex = 5;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(69, 89);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 20);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "From";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(69, 120);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(27, 20);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "To";
+            // 
             // Statistics
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1060, 689);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.dateTimePickerTo);
+            this.Controls.Add(this.dateTimePickerFrom);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.couponOverviewBtn);
+            this.Controls.Add(this.topArtistsBtn);
+            this.Controls.Add(this.statisticsView);
             this.Name = "Statistics";
             this.Text = "Statistics";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.statisticsView)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.DataGridView statisticsView;
+        private System.Windows.Forms.Button topArtistsBtn;
+        private System.Windows.Forms.Button couponOverviewBtn;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.DateTimePicker dateTimePickerFrom;
+        private System.Windows.Forms.DateTimePicker dateTimePickerTo;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

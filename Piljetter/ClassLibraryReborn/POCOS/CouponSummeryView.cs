@@ -6,7 +6,8 @@ namespace ClassLibrary
 {
     public class CouponSummery
     {
-        public int CouponId { get; set; }
-        public DateTime ExpirationDate { get; set; }
+        public int Year { get; set; }
+        public string ExpirationMonth { get; set; }
+        public int NumberOfCoupons { get; set; }
     }
 }

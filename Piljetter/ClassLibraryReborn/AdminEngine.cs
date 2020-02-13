@@ -4,6 +4,7 @@ using System.Text;
 using Dapper;
 using System.Linq;
 using System.Data.SqlClient;
+using ClassLibraryReborn.POCOS;
 
 namespace ClassLibrary
 {
@@ -124,6 +125,26 @@ namespace ClassLibrary
                 }
             }
 
+        }
+
+        public static List<TopArtistView> FindTopTenArtists(DateTime from, DateTime to)
+        {
+            using(var c = new SqlConnection(ConnectionString))
+            {
+                c.Open();
+                var sql = "SELECT TOP 10 o.Concert_Id AS ConcertId, a.Name AS Artist, s.Name AS Scene, c.Time, CAST(ROUND(((SUM(Num_Tickets)*100.0) / s.Seats), 0) AS int) AS PercentageSoldOut " +
+                    "FROM Orders AS o " +
+                    "INNER JOIN Concerts AS c ON o.Concert_Id = c.Id " +
+                    "INNER JOIN Artists AS a ON a.Id = c.Artist_Id " +
+                    "INNER JOIN Scenes AS s ON c.Scene_Id = s.Id " +
+                    "WHERE c.Time BETWEEN @from AND @to " +
+                    "GROUP BY a.Name, c.Time, Concert_Id, s.Seats, s.Name " +
+                    "Order BY PercentageSoldOut DESC";
+
+                List<TopArtistView> topArtistList = c.Query<TopArtistView>(sql, new { @from = from, @to = to }).ToList();
+
+                return topArtistList;
+            }
         }
 
 

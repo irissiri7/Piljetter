@@ -17,8 +17,7 @@ namespace PiljettAdminGUI
         public AdminStartPage()
         {
             InitializeComponent();
-            List<ConcertsViewAdmin> commingConcerts = SearchEngine.SearchConcertsForAdmin(">");
-            comingConcertsView.DataSource = commingConcerts;
+            
         }
 
         private void addConcertBtn_Click(object sender, EventArgs e)
@@ -30,27 +29,19 @@ namespace PiljettAdminGUI
             this.Hide();
         }
 
-        private void cancelBtn_Click(object sender, EventArgs e)
+        private void concertsOverviewBtn_Click(object sender, EventArgs e)
         {
-            var concertId = Convert.ToString(comingConcertsView.CurrentRow.Cells[0].Value);
-            bool giveCoupons = checkBoxCoupons.Checked;
-            var success = AdminEngine.CancelConcert(concertId, giveCoupons);
-            if (success)
-            {
-                MessageBox.Show("Concert deleted and ticket-money refunded");
-                AdminStartPage start = new AdminStartPage();
-                this.Hide();
-                start.Show();
-            }
-            else
-            {
-                MessageBox.Show("Something went wrong");
-            }
+            ConcertsOverview overviewFrm = new ConcertsOverview();
+            overviewFrm.Show();
+            this.Hide();
+            
         }
 
         private void statisticsBtn_Click(object sender, EventArgs e)
         {
-
+            Statistics stats = new Statistics();
+            stats.Show();
+            this.Hide();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
 
-            MakeShitTonOfTicketPurchases();
+            GenerateRandomCoupons();
         }
 
         public static void GenerateRandomCustomers()
@@ -68,7 +68,7 @@ namespace ConsoleApp
 
         }
 
-        public static void GenerateSHitTonOfConcerts()
+        public static void GenerateShitTonOfConcerts()
         {
             var sqlScenes = "SELECT Id FROM Scenes;";
 
@@ -128,11 +128,48 @@ namespace ConsoleApp
 
                 for (int i = 0; i < 1000; i++)
                 {
-                    VendingMachine.BuyTickets(customers[rdn.Next(0, customers.Count())], rdn.Next(1,5), int.Parse((concerts[rdn.Next(0, concerts.Count())])));                   }
+                    //VendingMachine.BuyTickets(customers[rdn.Next(0, customers.Count())], rdn.Next(1,5), int.Parse((concerts[rdn.Next(0, concerts.Count())])));
+                    VendingMachine.BuyTickets(customers[rdn.Next(0, customers.Count())], rdn.Next(1, 5), 1047);
+
+                }
+            }
+
+                Console.WriteLine("All good and done!");
+            }
+
+        public static void GenerateRandomCoupons()
+        {
+            var sqlCustomers = "SELECT Id FROM Customers;";
+            var sqlInsertCoupons = "INSERT INTO Coupons(Customer_Id, Expiration_Date) " +
+                "VALUES(@id, @date); ";
+            Random rdn = new Random();
+
+            using (var c = new SqlConnection(ConnectionString))
+            {
+                c.Open();
+                List<int> customers = c.Query<int>(sqlCustomers).ToList();
+                
+                for (int i = 0; i < 1000; i++)
+                {
+                    string year = rdn.Next(2020, 2025).ToString();
+                    string month = rdn.Next(1, 13).ToString();
+                    string day = rdn.Next(13, 29).ToString();
+                    string randomDate = year + "-" + month + "-" + day;
+
+                    try
+                    {
+                        c.Execute(sqlInsertCoupons, new { @date = randomDate, @id = customers[rdn.Next(0, customers.Count())] });
+                    }
+                    catch (SqlException e)
+                    {
+                        Console.WriteLine("Error?");
+                        continue;
+                    }
                 }
 
                 Console.WriteLine("All good and done!");
             }
+        }
 
         }
 

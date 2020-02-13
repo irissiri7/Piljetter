@@ -29,12 +29,8 @@
         private void InitializeComponent()
         {
             this.addConcertBtn = new System.Windows.Forms.Button();
-            this.cancelBtn = new System.Windows.Forms.Button();
-            this.comingConcertsView = new System.Windows.Forms.DataGridView();
-            this.comingConcertsLbl = new System.Windows.Forms.Label();
-            this.checkBoxCoupons = new System.Windows.Forms.CheckBox();
+            this.concertOverview = new System.Windows.Forms.Button();
             this.statisticsBtn = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.comingConcertsView)).BeginInit();
             this.SuspendLayout();
             // 
             // addConcertBtn
@@ -47,55 +43,22 @@
             this.addConcertBtn.UseVisualStyleBackColor = true;
             this.addConcertBtn.Click += new System.EventHandler(this.addConcertBtn_Click);
             // 
-            // cancelBtn
+            // concertOverview
             // 
-            this.cancelBtn.Location = new System.Drawing.Point(23, 162);
-            this.cancelBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cancelBtn.Name = "cancelBtn";
-            this.cancelBtn.Size = new System.Drawing.Size(309, 52);
-            this.cancelBtn.TabIndex = 1;
-            this.cancelBtn.Text = "Cancel Concert";
-            this.cancelBtn.UseVisualStyleBackColor = true;
-            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
-            // 
-            // comingConcertsView
-            // 
-            this.comingConcertsView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.comingConcertsView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.comingConcertsView.Location = new System.Drawing.Point(402, 88);
-            this.comingConcertsView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comingConcertsView.Name = "comingConcertsView";
-            this.comingConcertsView.RowHeadersWidth = 62;
-            this.comingConcertsView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.comingConcertsView.Size = new System.Drawing.Size(565, 588);
-            this.comingConcertsView.TabIndex = 2;
-            // 
-            // comingConcertsLbl
-            // 
-            this.comingConcertsLbl.AutoSize = true;
-            this.comingConcertsLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comingConcertsLbl.Location = new System.Drawing.Point(396, 36);
-            this.comingConcertsLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.comingConcertsLbl.Name = "comingConcertsLbl";
-            this.comingConcertsLbl.Size = new System.Drawing.Size(238, 36);
-            this.comingConcertsLbl.TabIndex = 3;
-            this.comingConcertsLbl.Text = "Coming concerts";
-            // 
-            // checkBoxCoupons
-            // 
-            this.checkBoxCoupons.AutoSize = true;
-            this.checkBoxCoupons.Location = new System.Drawing.Point(23, 222);
-            this.checkBoxCoupons.Name = "checkBoxCoupons";
-            this.checkBoxCoupons.Size = new System.Drawing.Size(201, 24);
-            this.checkBoxCoupons.TabIndex = 6;
-            this.checkBoxCoupons.Text = "and also give coupons?";
-            this.checkBoxCoupons.UseVisualStyleBackColor = true;
+            this.concertOverview.Location = new System.Drawing.Point(23, 162);
+            this.concertOverview.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.concertOverview.Name = "concertOverview";
+            this.concertOverview.Size = new System.Drawing.Size(309, 52);
+            this.concertOverview.TabIndex = 1;
+            this.concertOverview.Text = "Concerts Overview";
+            this.concertOverview.UseVisualStyleBackColor = true;
+            this.concertOverview.Click += new System.EventHandler(this.concertsOverviewBtn_Click);
             // 
             // statisticsBtn
             // 
-            this.statisticsBtn.Location = new System.Drawing.Point(103, 380);
+            this.statisticsBtn.Location = new System.Drawing.Point(23, 238);
             this.statisticsBtn.Name = "statisticsBtn";
-            this.statisticsBtn.Size = new System.Drawing.Size(154, 90);
+            this.statisticsBtn.Size = new System.Drawing.Size(309, 56);
             this.statisticsBtn.TabIndex = 7;
             this.statisticsBtn.Text = "Statistics";
             this.statisticsBtn.UseVisualStyleBackColor = true;
@@ -105,28 +68,20 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1001, 852);
+            this.ClientSize = new System.Drawing.Size(368, 337);
             this.Controls.Add(this.statisticsBtn);
-            this.Controls.Add(this.checkBoxCoupons);
-            this.Controls.Add(this.comingConcertsLbl);
-            this.Controls.Add(this.comingConcertsView);
-            this.Controls.Add(this.cancelBtn);
+            this.Controls.Add(this.concertOverview);
             this.Controls.Add(this.addConcertBtn);
             this.Name = "AdminStartPage";
             this.Text = "Start page";
-            ((System.ComponentModel.ISupportInitialize)(this.comingConcertsView)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Button addConcertBtn;
-        private System.Windows.Forms.Button cancelBtn;
-        private System.Windows.Forms.DataGridView comingConcertsView;
-        private System.Windows.Forms.Label comingConcertsLbl;
-        private System.Windows.Forms.CheckBox checkBoxCoupons;
+        private System.Windows.Forms.Button concertOverview;
         private System.Windows.Forms.Button statisticsBtn;
     }
 }
