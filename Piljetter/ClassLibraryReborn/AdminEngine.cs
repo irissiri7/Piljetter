@@ -147,6 +147,38 @@ namespace ClassLibrary
             }
         }
 
+        public static List<CouponSummery> CouponOverview()
+        {
+            using (var c = new SqlConnection(ConnectionString))
+            {
+                c.Open();
+                var sql = "SELECT DATEPART(YEAR FROM Expiration_Date) AS Year, ExpirationMonth, COUNT(*) NumberOfCoupons FROM ( " +
+                    "SELECT *, " +
+                    "CASE " +
+                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 1 THEN 'January' " +
+                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 2 THEN 'February' " +
+                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 3 THEN 'March' " +
+                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 4 THEN 'April' " +
+                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 5 THEN 'May' " +
+                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 6 THEN 'June' " +
+                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 7 THEN 'July' " +
+                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 8 THEN 'August' " +
+                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 9 THEN 'September' " +
+                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 10 THEN 'October' " +
+                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 11 THEN 'November' " +
+                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 12 THEN 'December' " +
+                    "Else 'Unknown' " +
+                   "END AS 'ExpirationMonth' " +
+                   "FROM Coupons " +
+                   "WHERE Expiration_Date >= GETDATE() " +
+                   ") x " +
+                   "GROUP BY DATEPART(YEAR FROM Expiration_Date), DATEPART(MONTH FROM Expiration_Date), ExpirationMonth " +
+                   "ORDER BY DATEPART(YEAR FROM Expiration_Date)";
 
+                List<CouponSummery> couponSummery = c.Query<CouponSummery>(sql).ToList();
+
+                return couponSummery;
+            }
+        }
     }
 }

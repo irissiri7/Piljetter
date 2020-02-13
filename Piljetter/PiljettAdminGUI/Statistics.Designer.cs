@@ -31,7 +31,7 @@
             this.statisticsView = new System.Windows.Forms.DataGridView();
             this.topArtistsBtn = new System.Windows.Forms.Button();
             this.couponOverviewBtn = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.couponOvervBtn = new System.Windows.Forms.Button();
             this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
@@ -65,18 +65,19 @@
             this.couponOverviewBtn.Name = "couponOverviewBtn";
             this.couponOverviewBtn.Size = new System.Drawing.Size(294, 84);
             this.couponOverviewBtn.TabIndex = 2;
-            this.couponOverviewBtn.Text = "Coupon overview";
+            this.couponOverviewBtn.Text = "Passed concerts overview";
             this.couponOverviewBtn.UseVisualStyleBackColor = true;
             this.couponOverviewBtn.Click += new System.EventHandler(this.passedConcertsOverviewBtn_Click);
             // 
-            // button3
+            // couponOvervBtn
             // 
-            this.button3.Location = new System.Drawing.Point(73, 419);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(294, 87);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.couponOvervBtn.Location = new System.Drawing.Point(73, 419);
+            this.couponOvervBtn.Name = "couponOvervBtn";
+            this.couponOvervBtn.Size = new System.Drawing.Size(294, 87);
+            this.couponOvervBtn.TabIndex = 3;
+            this.couponOvervBtn.Text = "Coupon overview";
+            this.couponOvervBtn.UseVisualStyleBackColor = true;
+            this.couponOvervBtn.Click += new System.EventHandler(this.couponOvervBtn_Click);
             // 
             // dateTimePickerFrom
             // 
@@ -119,7 +120,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dateTimePickerTo);
             this.Controls.Add(this.dateTimePickerFrom);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.couponOvervBtn);
             this.Controls.Add(this.couponOverviewBtn);
             this.Controls.Add(this.topArtistsBtn);
             this.Controls.Add(this.statisticsView);
@@ -136,7 +137,7 @@
         private System.Windows.Forms.DataGridView statisticsView;
         private System.Windows.Forms.Button topArtistsBtn;
         private System.Windows.Forms.Button couponOverviewBtn;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button couponOvervBtn;
         private System.Windows.Forms.DateTimePicker dateTimePickerFrom;
         private System.Windows.Forms.DateTimePicker dateTimePickerTo;
         private System.Windows.Forms.Label label1;

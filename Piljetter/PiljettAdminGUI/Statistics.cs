@@ -33,5 +33,11 @@ namespace PiljettAdminGUI
             statisticsView.DataSource = passedConcerts;
 
         }
+
+        private void couponOvervBtn_Click(object sender, EventArgs e)
+        {
+            List<CouponSummery> coupons = AdminEngine.CouponOverview();
+            statisticsView.DataSource = coupons;
+        }
     }
 }
