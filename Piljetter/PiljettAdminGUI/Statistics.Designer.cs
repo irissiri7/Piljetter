@@ -36,6 +36,7 @@
             this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.statisticsView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,7 +58,7 @@
             this.topArtistsBtn.TabIndex = 1;
             this.topArtistsBtn.Text = "Top Concerts";
             this.topArtistsBtn.UseVisualStyleBackColor = true;
-            this.topArtistsBtn.Click += new System.EventHandler(this.topArtistsBtn_Click);
+            this.topArtistsBtn.Click += new System.EventHandler(this.TopArtistsBtn_Click);
             // 
             // couponOverviewBtn
             // 
@@ -65,9 +66,9 @@
             this.couponOverviewBtn.Name = "couponOverviewBtn";
             this.couponOverviewBtn.Size = new System.Drawing.Size(294, 84);
             this.couponOverviewBtn.TabIndex = 2;
-            this.couponOverviewBtn.Text = "Passed concerts overview";
+            this.couponOverviewBtn.Text = "Cancelled concerts overview";
             this.couponOverviewBtn.UseVisualStyleBackColor = true;
-            this.couponOverviewBtn.Click += new System.EventHandler(this.passedConcertsOverviewBtn_Click);
+            this.couponOverviewBtn.Click += new System.EventHandler(this.CancelledConcertsOverviewBtn_Click);
             // 
             // couponOvervBtn
             // 
@@ -77,7 +78,7 @@
             this.couponOvervBtn.TabIndex = 3;
             this.couponOvervBtn.Text = "Coupon overview";
             this.couponOvervBtn.UseVisualStyleBackColor = true;
-            this.couponOvervBtn.Click += new System.EventHandler(this.couponOvervBtn_Click);
+            this.couponOvervBtn.Click += new System.EventHandler(this.CouponOvervBtn_Click);
             // 
             // dateTimePickerFrom
             // 
@@ -111,11 +112,22 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "To";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(121, 639);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(176, 38);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Back to start";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Statistics
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1060, 689);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dateTimePickerTo);
@@ -142,5 +154,6 @@
         private System.Windows.Forms.DateTimePicker dateTimePickerTo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button1;
     }
 }

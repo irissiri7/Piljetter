@@ -33,6 +33,7 @@
             this.couponsCheckBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.backToStartBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.comingConcertsView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -43,12 +44,12 @@
             this.comingConcertsView.Name = "comingConcertsView";
             this.comingConcertsView.RowHeadersWidth = 62;
             this.comingConcertsView.RowTemplate.Height = 28;
-            this.comingConcertsView.Size = new System.Drawing.Size(1281, 431);
+            this.comingConcertsView.Size = new System.Drawing.Size(1281, 361);
             this.comingConcertsView.TabIndex = 0;
             // 
             // cancelConcertBtn
             // 
-            this.cancelConcertBtn.Location = new System.Drawing.Point(12, 585);
+            this.cancelConcertBtn.Location = new System.Drawing.Point(12, 501);
             this.cancelConcertBtn.Name = "cancelConcertBtn";
             this.cancelConcertBtn.Size = new System.Drawing.Size(154, 69);
             this.cancelConcertBtn.TabIndex = 1;
@@ -59,7 +60,7 @@
             // couponsCheckBox
             // 
             this.couponsCheckBox.AutoSize = true;
-            this.couponsCheckBox.Location = new System.Drawing.Point(190, 608);
+            this.couponsCheckBox.Location = new System.Drawing.Point(186, 546);
             this.couponsCheckBox.Name = "couponsCheckBox";
             this.couponsCheckBox.Size = new System.Drawing.Size(137, 24);
             this.couponsCheckBox.TabIndex = 2;
@@ -79,18 +80,29 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 552);
+            this.label2.Location = new System.Drawing.Point(14, 478);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(901, 20);
             this.label2.TabIndex = 4;
             this.label2.Text = "Select the concert you wish to cancel from the table and press \'Cancel concert\'. " +
     "Don\'t forget to grant coupons if its short notice!";
             // 
+            // backToStartBtn
+            // 
+            this.backToStartBtn.Location = new System.Drawing.Point(18, 587);
+            this.backToStartBtn.Name = "backToStartBtn";
+            this.backToStartBtn.Size = new System.Drawing.Size(148, 72);
+            this.backToStartBtn.TabIndex = 5;
+            this.backToStartBtn.Text = "Back to start";
+            this.backToStartBtn.UseVisualStyleBackColor = true;
+            this.backToStartBtn.Click += new System.EventHandler(this.backToStartBtn_Click);
+            // 
             // ConcertsOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1313, 671);
+            this.Controls.Add(this.backToStartBtn);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.couponsCheckBox);
@@ -111,5 +123,6 @@
         private System.Windows.Forms.CheckBox couponsCheckBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button backToStartBtn;
     }
 }

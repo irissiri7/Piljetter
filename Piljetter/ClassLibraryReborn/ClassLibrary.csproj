@@ -48,7 +48,8 @@
     <Compile Include="POCOS\AvailableArtistsView.cs" />
     <Compile Include="POCOS\AvailableScenesView.cs" />
     <Compile Include="ClientHistoryHandler.cs" />
-    <Compile Include="POCOS\CouponSummeryView.cs" />
+    <Compile Include="POCOS\CouponInfoCustomer.cs" />
+    <Compile Include="POCOS\CouponInfoAdmin.cs" />
     <Compile Include="POCOS\Customer.cs" />
     <Compile Include="CustomerHandler.cs" />
     <Compile Include="POCOS\ConcertsViewAdmin.cs" />

@@ -82,7 +82,8 @@ namespace ClassLibrary
                     c.Open();
                     using (var t = c.BeginTransaction())
                     {
-                        string sql = "WITH x AS (SELECT Customer_Id, SUM(Num_Tickets) as NumberOfTickets, AVG(Ticket_Price_At_Purchase) TicketPriceAtPurchase " +
+                        string sql = "WITH x AS " +
+                            "(SELECT Customer_Id, SUM(Num_Tickets) as NumberOfTickets, AVG(Ticket_Price_At_Purchase) TicketPriceAtPurchase " +
                             "FROM Orders AS o " +
                             "WHERE o.Concert_Id = @id GROUP BY o.Customer_Id) " +
                             "UPDATE Customers " +
@@ -90,8 +91,9 @@ namespace ClassLibrary
                             "FROM Customers AS c " +
                             "INNER JOIN x AS x " +
                             "ON x.Customer_Id = c.Id; " +
-                            "DELETE FROM Orders WHERE Concert_Id = @id; " +
-                            "DELETE FROM Concerts WHERE Id = @id;";
+                            "UPDATE Concerts " +
+                            "SET Cancelled = 1 " +
+                            "WHERE Id = @id";
 
                         c.Execute(sql, new { @id = id}, transaction: t);
                         t.Commit();
@@ -137,7 +139,7 @@ namespace ClassLibrary
                     "INNER JOIN Concerts AS c ON o.Concert_Id = c.Id " +
                     "INNER JOIN Artists AS a ON a.Id = c.Artist_Id " +
                     "INNER JOIN Scenes AS s ON c.Scene_Id = s.Id " +
-                    "WHERE c.Time BETWEEN @from AND @to " +
+                    "WHERE c.Cancelled = 0 AND c.Time BETWEEN @from AND @to " +
                     "GROUP BY a.Name, c.Time, Concert_Id, s.Seats, s.Name " +
                     "Order BY PercentageSoldOut DESC";
 
@@ -147,7 +149,7 @@ namespace ClassLibrary
             }
         }
 
-        public static List<CouponSummery> CouponOverview()
+        public static List<CouponInfoAdmin> CouponOverview()
         {
             using (var c = new SqlConnection(ConnectionString))
             {
@@ -173,9 +175,9 @@ namespace ClassLibrary
                    "WHERE Expiration_Date >= GETDATE() " +
                    ") x " +
                    "GROUP BY DATEPART(YEAR FROM Expiration_Date), DATEPART(MONTH FROM Expiration_Date), ExpirationMonth " +
-                   "ORDER BY DATEPART(YEAR FROM Expiration_Date)";
+                   "ORDER BY DATEPART(YEAR FROM Expiration_Date), DATEPART(MONTH FROM Expiration_Date)";
 
-                List<CouponSummery> couponSummery = c.Query<CouponSummery>(sql).ToList();
+                List<CouponInfoAdmin> couponSummery = c.Query<CouponInfoAdmin>(sql).ToList();
 
                 return couponSummery;
             }

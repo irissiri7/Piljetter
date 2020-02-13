@@ -20,7 +20,7 @@ namespace ClassLibrary
                 string sql = "Select c.Id, c.Time, a.Name Artist, s.Name Scene, s.Country, s.City, c.Available_Tickets AS AvailableTickets FROM Concerts as c " +
                     "INNER JOIN Artists as a ON a.Id = c.Artist_Id " +
                     "INNER JOIN Scenes as s ON s.Id = c.Scene_Id " +
-                    "WHERE a.Name LIKE @artist AND s.Name LIKE @scene AND s.Country LIKE @country AND s.City LIKE @city AND c.Time >= GETDATE() " +
+                    "WHERE c.Cancelled = 0 AND a.Name LIKE @artist AND s.Name LIKE @scene AND s.Country LIKE @country AND s.City LIKE @city AND c.Time >= GETDATE() " +
                     "ORDER BY c.Time;";
 
                 List<ConcertsView> concerts = c.Query<ConcertsView>(sql, new {@artist = $"%{artist}%", @scene = $"%{scene}%", @country = $"{country}%", @city = $"{city}%" } ).ToList();
@@ -29,8 +29,8 @@ namespace ClassLibrary
 
         }
 
-        //time == bool
-        public static List<ConcertsViewAdmin> SearchConcertsForAdmin( string time)
+        //PS, the 'time' variable is NOT a user input.
+        public static List<ConcertsViewAdmin> SearchCommingConcertsForAdmin( string time)
         {
             using (var c = new SqlConnection(ConnectionString))
             {
@@ -39,7 +39,27 @@ namespace ClassLibrary
                     "FROM Concerts as c " +
                     "INNER JOIN Artists as a ON a.Id = c.Artist_Id " +
                     "INNER JOIN Scenes as s ON s.Id = c.Scene_Id " +
-                    "WHERE c.Time " + time + " GETDATE() ORDER BY c.Time; ";
+                    "WHERE c.Cancelled = 0 AND c.Time " + time + " GETDATE() " +
+                    "ORDER BY c.Time; ";
+
+                List<ConcertsViewAdmin> commingConcerts = c.Query<ConcertsViewAdmin>(sql).ToList();
+
+                return commingConcerts;
+            };
+
+        }
+
+        public static List<ConcertsViewAdmin> SearchCancelledConcertsForAdmin()
+        {
+            using (var c = new SqlConnection(ConnectionString))
+            {
+                c.Open();
+                string sql = "Select c.Id, c.Time, a.Name Artist, s.Name Scene, s.Country, s.City, s.Seats - c.Available_Tickets AS SoldTickets, c.Total_Cost AS Expense, (s.Seats - c.Available_Tickets) * c.Ticket_Price AS Earnings, (s.Seats - c.Available_Tickets) * c.Ticket_Price - c.Total_Cost AS TotalRevenue " +
+                    "FROM Concerts as c " +
+                    "INNER JOIN Artists as a ON a.Id = c.Artist_Id " +
+                    "INNER JOIN Scenes as s ON s.Id = c.Scene_Id " +
+                    "WHERE c.Cancelled = 1 " +
+                    "ORDER BY c.Time; ";
 
                 List<ConcertsViewAdmin> commingConcerts = c.Query<ConcertsViewAdmin>(sql).ToList();
 

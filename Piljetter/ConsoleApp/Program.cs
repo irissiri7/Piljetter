@@ -16,7 +16,8 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
 
-            GenerateRandomCoupons();
+            GenerateShitTonOfConcerts();
+            MakeShitTonOfTicketPurchases();
         }
 
         public static void GenerateRandomCustomers()
@@ -91,11 +92,11 @@ namespace ConsoleApp
                 List<string> artists = c.Query<string>(sqlArtists).ToList();
                 List<string> scenes = c.Query<string>(sqlScenes).ToList();
 
-                for (int i = 0; i < 1000; i++)
+                for (int i = 0; i < 10; i++)
                 {
                     string year = rdn.Next(2020, 2025).ToString();
-                    string month = rdn.Next(1, 31).ToString();
-                    string day = rdn.Next(13, 29).ToString();
+                    string month = rdn.Next(1, 12).ToString();
+                    string day = rdn.Next(13, 31).ToString();
                     string randomDate = year + "-" + month + "-" + day;
 
                     try
@@ -104,6 +105,7 @@ namespace ConsoleApp
                     }
                     catch (SqlException)
                     {
+                        Console.WriteLine("Collision");
                         continue;
                     }
                 }
@@ -126,10 +128,10 @@ namespace ConsoleApp
                 List<Customer> customers = c.Query<Customer>(sqlCustomers).ToList();
                 List<string> concerts = c.Query<string>(sqlConcerts).ToList();
 
-                for (int i = 0; i < 1000; i++)
+                for (int i = 0; i < 100; i++)
                 {
-                    //VendingMachine.BuyTickets(customers[rdn.Next(0, customers.Count())], rdn.Next(1,5), int.Parse((concerts[rdn.Next(0, concerts.Count())])));
-                    VendingMachine.BuyTickets(customers[rdn.Next(0, customers.Count())], rdn.Next(1, 5), 1047);
+                    VendingMachine.BuyTickets(customers[rdn.Next(0, customers.Count())], rdn.Next(1, 5), int.Parse((concerts[rdn.Next(0, concerts.Count())])));
+                    //VendingMachine.BuyTickets(customers[rdn.Next(0, customers.Count())], rdn.Next(1, 5), 1047);
 
                 }
             }

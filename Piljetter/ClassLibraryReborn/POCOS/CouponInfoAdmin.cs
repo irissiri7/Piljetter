@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ClassLibrary
 {
-    public class CouponSummery
+    public class CouponInfoAdmin
     {
         public int Year { get; set; }
         public string ExpirationMonth { get; set; }

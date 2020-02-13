@@ -19,7 +19,7 @@ namespace Piljetter
         {
             InitializeComponent();
             CurrentCustomer = currentCustomer;
-            searchResultTable.DataSource = concerts;
+            searchResultView.DataSource = concerts;
         }
 
         private void BackToMyPageBtn_Click(object sender, EventArgs e)
@@ -32,7 +32,7 @@ namespace Piljetter
         private void BuyTicketBtn_Click(object sender, EventArgs e)
         {
             var tickets = Convert.ToInt32(Math.Round(numTickets.Value, 0));
-            var concert = Convert.ToInt32(Math.Round(concertId.Value, 0));
+            var concert = Convert.ToInt32(searchResultView.CurrentRow.Cells[0].Value);
 
             bool success = VendingMachine.BuyTickets(CurrentCustomer, tickets, concert);
             CurrentCustomer = CustomerHandler.SignIn(CurrentCustomer.Name, CurrentCustomer.Password)[0];

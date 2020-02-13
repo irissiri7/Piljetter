@@ -21,23 +21,30 @@ namespace PiljettAdminGUI
             dateTimePickerTo.CustomFormat = "yyy-mm-dd";
         }
 
-        private void topArtistsBtn_Click(object sender, EventArgs e)
+        private void TopArtistsBtn_Click(object sender, EventArgs e)
         {
             List<TopArtistView> topArtistList = AdminEngine.FindTopTenArtists(dateTimePickerFrom.Value, dateTimePickerTo.Value);
             statisticsView.DataSource = topArtistList;
         }
 
-        private void passedConcertsOverviewBtn_Click(object sender, EventArgs e)
+        private void CancelledConcertsOverviewBtn_Click(object sender, EventArgs e)
         {
-            List<ConcertsViewAdmin> passedConcerts = SearchEngine.SearchConcertsForAdmin("<");
-            statisticsView.DataSource = passedConcerts;
+            List<ConcertsViewAdmin> cancelledConcerts = SearchEngine.SearchCancelledConcertsForAdmin();
+            statisticsView.DataSource = cancelledConcerts;
 
         }
 
-        private void couponOvervBtn_Click(object sender, EventArgs e)
+        private void CouponOvervBtn_Click(object sender, EventArgs e)
         {
-            List<CouponSummery> coupons = AdminEngine.CouponOverview();
+            List<ClassLibrary.CouponInfoAdmin> coupons = AdminEngine.CouponOverview();
             statisticsView.DataSource = coupons;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AdminStartPage start = new AdminStartPage();
+            start.Show();
+            this.Hide();
         }
     }
 }

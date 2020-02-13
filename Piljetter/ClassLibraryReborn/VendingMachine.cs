@@ -41,6 +41,7 @@ namespace ClassLibrary
             return success;
         }
 
+
         public static bool BuyPesetas(Customer customer, int amountPesetas)
         {
             bool success = false;

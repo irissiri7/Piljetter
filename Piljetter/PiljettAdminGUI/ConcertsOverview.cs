@@ -16,7 +16,7 @@ namespace PiljettAdminGUI
         public ConcertsOverview()
         {
             InitializeComponent();
-            List<ConcertsViewAdmin> commingConcerts = SearchEngine.SearchConcertsForAdmin(">");
+            List<ConcertsViewAdmin> commingConcerts = SearchEngine.SearchCommingConcertsForAdmin(">");
             comingConcertsView.DataSource = commingConcerts;
         }
 
@@ -41,6 +41,13 @@ namespace PiljettAdminGUI
             {
                 MessageBox.Show("Something went wrong");
             }
+        }
+
+        private void backToStartBtn_Click(object sender, EventArgs e)
+        {
+            AdminStartPage start = new AdminStartPage();
+            start.Show();
+            this.Hide();
         }
     }
 }

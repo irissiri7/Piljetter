@@ -1,0 +1,2 @@
+//NONCLUSTERED KEYS
+1. CREATE NONCLUSTERED customerId ON Coupons (Customer_Id)

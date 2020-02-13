@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using ClassLibrary;
+
 
 namespace ClassLibrary
 {
@@ -34,10 +36,10 @@ namespace ClassLibrary
             return purchaseHistory;
         }
 
-        public static List<CouponSummery> GetCustomersCouponRecords(Customer customer)
+        public static List<CouponInfoCustomer> GetCustomersCouponRecords(Customer customer)
         {
 
-            var couponRecords = new List<CouponSummery>();
+            var couponRecords = new List<CouponInfoCustomer>();
 
             using (var c = new SqlConnection(ConnectionString))
             {
@@ -45,9 +47,10 @@ namespace ClassLibrary
 
                 string sql = "SELECT Id as CouponId, Expiration_Date AS ExpirationDate " +
                     "FROM Coupons " +
-                    "WHERE Customer_Id = @id; ";
+                    "WHERE Customer_Id = @id " +
+                    "ORDER BY ExpirationDate ";
 
-                couponRecords = c.Query<CouponSummery>(sql, new { @id = customer.Id }).ToList();
+                couponRecords = c.Query<CouponInfoCustomer>(sql, new { @id = customer.Id }).ToList();
             };
 
             return couponRecords;

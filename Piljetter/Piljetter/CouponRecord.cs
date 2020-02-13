@@ -15,7 +15,7 @@ namespace Piljetter
     {
         public Customer CurrentCustomer { get; set; }
         
-        public CouponRecord(Customer customer, List<CouponSummery> listOfCoupons)
+        public CouponRecord(Customer customer, List<CouponInfoCustomer> listOfCoupons)
         {
             InitializeComponent();
             CurrentCustomer = customer;

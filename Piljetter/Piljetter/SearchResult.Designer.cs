@@ -31,16 +31,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buy_ticketBtn = new System.Windows.Forms.Button();
             this.back_to_my_pageBtn = new System.Windows.Forms.Button();
-            this.searchResultTable = new System.Windows.Forms.DataGridView();
+            this.searchResultView = new System.Windows.Forms.DataGridView();
             this.BackToMyPageBtn = new System.Windows.Forms.Button();
             this.BuyTicketBtn = new System.Windows.Forms.Button();
-            this.ConcertIdLbl = new System.Windows.Forms.Label();
             this.amountTicketsLbl = new System.Windows.Forms.Label();
             this.numTickets = new System.Windows.Forms.NumericUpDown();
-            this.concertId = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.searchResultTable)).BeginInit();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            ((System.ComponentModel.ISupportInitialize)(this.searchResultView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTickets)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.concertId)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -71,15 +69,15 @@
             this.back_to_my_pageBtn.Text = "Back to my page";
             this.back_to_my_pageBtn.UseVisualStyleBackColor = true;
             // 
-            // searchResultTable
+            // searchResultView
             // 
-            this.searchResultTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.searchResultTable.Location = new System.Drawing.Point(0, 0);
-            this.searchResultTable.Name = "searchResultTable";
-            this.searchResultTable.RowHeadersWidth = 62;
-            this.searchResultTable.RowTemplate.Height = 28;
-            this.searchResultTable.Size = new System.Drawing.Size(1503, 352);
-            this.searchResultTable.TabIndex = 4;
+            this.searchResultView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.searchResultView.Location = new System.Drawing.Point(0, 0);
+            this.searchResultView.Name = "searchResultView";
+            this.searchResultView.RowHeadersWidth = 62;
+            this.searchResultView.RowTemplate.Height = 28;
+            this.searchResultView.Size = new System.Drawing.Size(1503, 352);
+            this.searchResultView.TabIndex = 4;
             // 
             // BackToMyPageBtn
             // 
@@ -95,27 +93,17 @@
             // 
             this.BuyTicketBtn.Location = new System.Drawing.Point(12, 388);
             this.BuyTicketBtn.Name = "BuyTicketBtn";
-            this.BuyTicketBtn.Size = new System.Drawing.Size(172, 148);
+            this.BuyTicketBtn.Size = new System.Drawing.Size(172, 112);
             this.BuyTicketBtn.TabIndex = 7;
             this.BuyTicketBtn.Text = "Buy ticket";
             this.BuyTicketBtn.UseVisualStyleBackColor = true;
             this.BuyTicketBtn.Click += new System.EventHandler(this.BuyTicketBtn_Click);
             // 
-            // ConcertIdLbl
-            // 
-            this.ConcertIdLbl.AutoSize = true;
-            this.ConcertIdLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ConcertIdLbl.Location = new System.Drawing.Point(202, 388);
-            this.ConcertIdLbl.Name = "ConcertIdLbl";
-            this.ConcertIdLbl.Size = new System.Drawing.Size(168, 25);
-            this.ConcertIdLbl.TabIndex = 9;
-            this.ConcertIdLbl.Text = "Enter id of concert";
-            // 
             // amountTicketsLbl
             // 
             this.amountTicketsLbl.AutoSize = true;
             this.amountTicketsLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.amountTicketsLbl.Location = new System.Drawing.Point(202, 448);
+            this.amountTicketsLbl.Location = new System.Drawing.Point(194, 388);
             this.amountTicketsLbl.Name = "amountTicketsLbl";
             this.amountTicketsLbl.Size = new System.Drawing.Size(175, 25);
             this.amountTicketsLbl.TabIndex = 10;
@@ -124,7 +112,7 @@
             // numTickets
             // 
             this.numTickets.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numTickets.Location = new System.Drawing.Point(405, 448);
+            this.numTickets.Location = new System.Drawing.Point(394, 388);
             this.numTickets.Minimum = new decimal(new int[] {
             1,
             0,
@@ -139,49 +127,35 @@
             0,
             0});
             // 
-            // concertId
+            // checkBox1
             // 
-            this.concertId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.concertId.Location = new System.Drawing.Point(405, 386);
-            this.concertId.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.concertId.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.concertId.Name = "concertId";
-            this.concertId.Size = new System.Drawing.Size(88, 30);
-            this.concertId.TabIndex = 12;
-            this.concertId.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox1.Location = new System.Drawing.Point(205, 456);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(164, 29);
+            this.checkBox1.TabIndex = 12;
+            this.checkBox1.Text = "Use coupons?";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // SearchResult
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1507, 610);
-            this.Controls.Add(this.concertId);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.numTickets);
             this.Controls.Add(this.amountTicketsLbl);
-            this.Controls.Add(this.ConcertIdLbl);
             this.Controls.Add(this.BuyTicketBtn);
             this.Controls.Add(this.BackToMyPageBtn);
-            this.Controls.Add(this.searchResultTable);
+            this.Controls.Add(this.searchResultView);
             this.Controls.Add(this.back_to_my_pageBtn);
             this.Controls.Add(this.buy_ticketBtn);
             this.Controls.Add(this.label1);
             this.Name = "SearchResult";
             this.Text = "Search result";
-            ((System.ComponentModel.ISupportInitialize)(this.searchResultTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchResultView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTickets)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.concertId)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,12 +165,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buy_ticketBtn;
         private System.Windows.Forms.Button back_to_my_pageBtn;
-        private System.Windows.Forms.DataGridView searchResultTable;
+        private System.Windows.Forms.DataGridView searchResultView;
         private System.Windows.Forms.Button BackToMyPageBtn;
         private System.Windows.Forms.Button BuyTicketBtn;
-        private System.Windows.Forms.Label ConcertIdLbl;
         private System.Windows.Forms.Label amountTicketsLbl;
         private System.Windows.Forms.NumericUpDown numTickets;
-        private System.Windows.Forms.NumericUpDown concertId;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
