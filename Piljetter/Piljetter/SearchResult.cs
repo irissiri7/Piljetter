@@ -33,8 +33,9 @@ namespace Piljetter
         {
             var tickets = Convert.ToInt32(Math.Round(numTickets.Value, 0));
             var concert = Convert.ToInt32(searchResultView.CurrentRow.Cells[0].Value);
+            var useCoupons = useCouponBox.Checked;
 
-            bool success = VendingMachine.BuyTickets(CurrentCustomer, tickets, concert);
+            bool success = VendingMachine.BuyTickets(CurrentCustomer, tickets, concert, useCoupons);
             CurrentCustomer = CustomerHandler.SignIn(CurrentCustomer.Name, CurrentCustomer.Password)[0];
             if (success)
             {

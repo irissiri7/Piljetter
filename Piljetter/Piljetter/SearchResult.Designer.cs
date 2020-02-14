@@ -36,7 +36,7 @@
             this.BuyTicketBtn = new System.Windows.Forms.Button();
             this.amountTicketsLbl = new System.Windows.Forms.Label();
             this.numTickets = new System.Windows.Forms.NumericUpDown();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.useCouponBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.searchResultView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTickets)).BeginInit();
             this.SuspendLayout();
@@ -127,23 +127,23 @@
             0,
             0});
             // 
-            // checkBox1
+            // useCouponBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(205, 456);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(164, 29);
-            this.checkBox1.TabIndex = 12;
-            this.checkBox1.Text = "Use coupons?";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.useCouponBox.AutoSize = true;
+            this.useCouponBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.useCouponBox.Location = new System.Drawing.Point(205, 456);
+            this.useCouponBox.Name = "useCouponBox";
+            this.useCouponBox.Size = new System.Drawing.Size(164, 29);
+            this.useCouponBox.TabIndex = 12;
+            this.useCouponBox.Text = "Use coupons?";
+            this.useCouponBox.UseVisualStyleBackColor = true;
             // 
             // SearchResult
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1507, 610);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.useCouponBox);
             this.Controls.Add(this.numTickets);
             this.Controls.Add(this.amountTicketsLbl);
             this.Controls.Add(this.BuyTicketBtn);
@@ -170,6 +170,6 @@
         private System.Windows.Forms.Button BuyTicketBtn;
         private System.Windows.Forms.Label amountTicketsLbl;
         private System.Windows.Forms.NumericUpDown numTickets;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox useCouponBox;
     }
 }

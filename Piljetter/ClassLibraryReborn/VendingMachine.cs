@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data.SqlClient;
 using Dapper;
+using System.Linq;
 
 namespace ClassLibrary
 {
@@ -10,7 +11,7 @@ namespace ClassLibrary
     {
         private static string ConnectionString { get; set; } = @"Data Source=MS713826\SQLEXPRESS;Initial Catalog=PiljettDb;Integrated Security=True";
 
-        public static bool BuyTickets(Customer customer, int numOfTickets, int concertId)
+        public static bool BuyTickets(Customer customer, int numOfTickets, int concertId, bool useCoupon)
         {
             bool success = true;
             try
@@ -20,6 +21,20 @@ namespace ClassLibrary
                     c.Open();
                     using (var t = c.BeginTransaction())
                     {
+                        var sqlGetCouponIds = "SELECT Id From Coupons WHERE Customer_Id = @customerId AND Used = 0";
+                        List<int> couponIds = c.Query<int>(sqlGetCouponIds, new { @customerId = customer.Id }, transaction: t).ToList();
+                        
+                        if (useCoupon && couponIds.Count > 0)
+                        {
+                            var sqlReinburseCustomerAndDeactivateCoupon = "UPDATE Customers " +
+                                "SET Pesetas = Pesetas + (SELECT Ticket_Price FROM Concerts WHERE Id = @concertId) " +
+                                "WHERE Id = @customerId " +
+                                "UPDATE Coupons " +
+                                "SET Used = 1 WHERE Id = @couponId";
+                            
+                            c.Execute(sqlReinburseCustomerAndDeactivateCoupon, new { @concertId = concertId, @customerId = customer.Id, @couponId = couponIds[0] }, transaction: t);
+
+                        }
                         string sql = "UPDATE Concerts SET Available_Tickets = Available_Tickets - @numOfTickets " +
                             "WHERE Concerts.Id = @concertId; " +
                             "UPDATE Customers SET Pesetas = Pesetas - (@numOfTickets * ( SELECT Ticket_Price FROM Concerts WHERE Id = @concertId)) " +
@@ -40,7 +55,6 @@ namespace ClassLibrary
 
             return success;
         }
-
 
         public static bool BuyPesetas(Customer customer, int amountPesetas)
         {

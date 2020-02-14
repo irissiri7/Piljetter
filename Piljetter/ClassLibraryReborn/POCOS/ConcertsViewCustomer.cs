@@ -10,8 +10,9 @@ namespace ClassLibrary
         public DateTime Time { get; set; }
         public string Artist { get; set; }
         public string Scene { get; set; }
-        public string Country { get; set; }
         public string City { get; set; }
+        public string Country { get; set; }
+        public Decimal TicketPrice { get; set; }
         public int AvailableTickets { get; set; }
 
     }
