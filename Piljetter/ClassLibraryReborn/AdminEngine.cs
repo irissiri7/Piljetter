@@ -5,12 +5,14 @@ using Dapper;
 using System.Linq;
 using System.Data.SqlClient;
 using ClassLibraryReborn.POCOS;
+using System.Configuration;
 
 namespace ClassLibrary
 {
     public static class AdminEngine
     {
-        private static string ConnectionString { get; set; } = @"Data Source=MS713826\SQLEXPRESS;Initial Catalog=PiljettDb;Integrated Security=True";
+        private static string ConnectionString { get; set; } = ConfigurationManager.ConnectionStrings["connection"].ConnectionString;
+
 
         public static List<AvailableArtistsView> GetAvailableArtists()
         {

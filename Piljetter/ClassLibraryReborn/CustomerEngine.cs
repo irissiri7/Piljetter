@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using Dapper;
 using System.Linq;
+using System.Configuration;
 
 namespace ClassLibrary
 {
-    public static class CustomerHandler
+    public static class CustomerEngine
     {
-        private static string ConnectionString { get; set; } = @"Data Source=MS713826\SQLEXPRESS;Initial Catalog=PiljettDb;Integrated Security=True";
+        private static string ConnectionString { get; set; } = ConfigurationManager.ConnectionStrings["connection"].ConnectionString;
 
         public static List<Customer> SignIn(string name, string password)
         {
@@ -43,6 +44,8 @@ namespace ClassLibrary
 
             return sucess;
         }
+
+        
 
     }
 }

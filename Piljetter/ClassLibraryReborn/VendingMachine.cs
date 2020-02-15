@@ -4,12 +4,13 @@ using System.Text;
 using System.Data.SqlClient;
 using Dapper;
 using System.Linq;
+using System.Configuration;
 
 namespace ClassLibrary
 {
     public static class VendingMachine
     {
-        private static string ConnectionString { get; set; } = @"Data Source=MS713826\SQLEXPRESS;Initial Catalog=PiljettDb;Integrated Security=True";
+        private static string ConnectionString { get; set; } = ConfigurationManager.ConnectionStrings["connection"].ConnectionString;
 
         public static bool BuyTickets(Customer customer, int numOfTickets, int concertId, bool useCoupon)
         {
@@ -21,7 +22,7 @@ namespace ClassLibrary
                     c.Open();
                     using (var t = c.BeginTransaction())
                     {
-                        var sqlGetCouponIds = "SELECT Id From Coupons WHERE Customer_Id = @customerId AND Used = 0";
+                        var sqlGetCouponIds = "SELECT Id From Coupons WHERE Customer_Id = @customerId AND Used = 0 AND Expiration_Date > GETDATE()";
                         List<int> couponIds = c.Query<int>(sqlGetCouponIds, new { @customerId = customer.Id }, transaction: t).ToList();
                         
                         if (useCoupon && couponIds.Count > 0)

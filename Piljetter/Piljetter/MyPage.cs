@@ -40,7 +40,7 @@ namespace Piljetter
 
         private void My_purchasesBtn_Click(object sender, EventArgs e)
         {
-            var purchaseHistory = ClientHistoryHandler.GetCustomersPurchaseHistory(CurrentCustomer);
+            var purchaseHistory = SearchEngine.GetCustomersPurchaseHistory(CurrentCustomer);
             PurchaseHistoryResults phr = new PurchaseHistoryResults(CurrentCustomer, purchaseHistory);
             phr.Show();
             this.Close();
@@ -48,7 +48,7 @@ namespace Piljetter
 
         private void My_CouponsBtn_Click(object sender, EventArgs e)
         {
-            var coupons = ClientHistoryHandler.GetCustomersCouponRecords(CurrentCustomer);
+            var coupons = SearchEngine.GetCustomersCouponRecords(CurrentCustomer);
             CouponRecord cr = new CouponRecord(CurrentCustomer, coupons);
             cr.Show();
             this.Close();

@@ -29,7 +29,7 @@ namespace Piljetter
             {
                 MessageBox.Show("Pesetas refilled!");
                 //Here i must "sign in" (aka "refresh") the customer again to get the updated information from the Db.
-                CurrentCustomer = CustomerHandler.SignIn(CurrentCustomer.Name, CurrentCustomer.Password)[0];
+                CurrentCustomer = CustomerEngine.SignIn(CurrentCustomer.Name, CurrentCustomer.Password)[0];
                 MyPage myPage = new MyPage(CurrentCustomer);
                 myPage.Show();
                 this.Hide();

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using ClassLibrary;
+using System.Configuration;
 
 namespace ConsoleApp
 {
@@ -15,9 +16,10 @@ namespace ConsoleApp
 
         static void Main(string[] args)
         {
-
-            GenerateShitTonOfConcerts();
-            MakeShitTonOfTicketPurchases();
+            var connection = ConfigurationManager.ConnectionStrings["connection"].ConnectionString;
+            //GenerateShitTonOfConcerts();
+            //MakeShitTonOfTicketPurchases();
+            Console.WriteLine("hello");
         }
 
         public static void GenerateRandomCustomers()
@@ -130,7 +132,7 @@ namespace ConsoleApp
 
                 for (int i = 0; i < 100; i++)
                 {
-                    VendingMachine.BuyTickets(customers[rdn.Next(0, customers.Count())], rdn.Next(1, 5), int.Parse((concerts[rdn.Next(0, concerts.Count())])));
+                    VendingMachine.BuyTickets(customers[rdn.Next(0, customers.Count())], rdn.Next(1, 5), int.Parse((concerts[rdn.Next(0, concerts.Count())])), false);
                     //VendingMachine.BuyTickets(customers[rdn.Next(0, customers.Count())], rdn.Next(1, 5), 1047);
 
                 }

@@ -34,7 +34,7 @@ namespace Piljetter
             }
             else
             {
-                List<Customer> customer = CustomerHandler.SignIn(name, password);
+                List<Customer> customer = CustomerEngine.SignIn(name, password);
                 if(customer.Count == 0)
                 {
                     MessageBox.Show("Could not find user");
@@ -42,7 +42,6 @@ namespace Piljetter
                 else
                 {
                     this.Hide();
-                    MessageBox.Show($"Welcome {customer[0].Name}");
                     MyPage frm2 = new MyPage(customer[0]);
                     frm2.Show();
                 }
@@ -61,7 +60,7 @@ namespace Piljetter
             }
             else
             {
-                bool couldRegisterNewCustomer = CustomerHandler.RegisterNewCustomer(name, password);
+                bool couldRegisterNewCustomer = CustomerEngine.RegisterNewCustomer(name, password);
                 if (couldRegisterNewCustomer)
                 {
                     MessageBox.Show("Login successful");

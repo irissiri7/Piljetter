@@ -34,6 +34,7 @@
             this.Register = new System.Windows.Forms.Button();
             this.Nametxt = new System.Windows.Forms.TextBox();
             this.Passwordtxt = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Name
@@ -58,9 +59,9 @@
             // 
             // LogIn
             // 
-            this.LogIn.Location = new System.Drawing.Point(46, 371);
+            this.LogIn.Location = new System.Drawing.Point(35, 196);
             this.LogIn.Name = "LogIn";
-            this.LogIn.Size = new System.Drawing.Size(130, 60);
+            this.LogIn.Size = new System.Drawing.Size(360, 60);
             this.LogIn.TabIndex = 2;
             this.LogIn.Text = "Log in";
             this.LogIn.UseVisualStyleBackColor = true;
@@ -68,9 +69,9 @@
             // 
             // Register
             // 
-            this.Register.Location = new System.Drawing.Point(243, 371);
+            this.Register.Location = new System.Drawing.Point(35, 439);
             this.Register.Name = "Register";
-            this.Register.Size = new System.Drawing.Size(117, 60);
+            this.Register.Size = new System.Drawing.Size(360, 59);
             this.Register.TabIndex = 3;
             this.Register.Text = "Register";
             this.Register.UseVisualStyleBackColor = true;
@@ -91,11 +92,21 @@
             this.Passwordtxt.Size = new System.Drawing.Size(203, 26);
             this.Passwordtxt.TabIndex = 5;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(154, 402);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(119, 20);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "New customer?";
+            // 
             // SignIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(437, 507);
+            this.ClientSize = new System.Drawing.Size(437, 510);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.Passwordtxt);
             this.Controls.Add(this.Nametxt);
             this.Controls.Add(this.Register);
@@ -118,6 +129,7 @@
         private System.Windows.Forms.Button Register;
         private System.Windows.Forms.TextBox Nametxt;
         private System.Windows.Forms.TextBox Passwordtxt;
+        private System.Windows.Forms.Label label1;
     }
 }
 

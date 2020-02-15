@@ -38,7 +38,7 @@
             // 
             // search_concertBtn
             // 
-            this.search_concertBtn.Location = new System.Drawing.Point(21, 92);
+            this.search_concertBtn.Location = new System.Drawing.Point(152, 111);
             this.search_concertBtn.Name = "search_concertBtn";
             this.search_concertBtn.Size = new System.Drawing.Size(225, 77);
             this.search_concertBtn.TabIndex = 0;
@@ -48,7 +48,7 @@
             // 
             // My_purchasesBtn
             // 
-            this.My_purchasesBtn.Location = new System.Drawing.Point(21, 340);
+            this.My_purchasesBtn.Location = new System.Drawing.Point(152, 313);
             this.My_purchasesBtn.Name = "My_purchasesBtn";
             this.My_purchasesBtn.Size = new System.Drawing.Size(225, 77);
             this.My_purchasesBtn.TabIndex = 2;
@@ -58,7 +58,7 @@
             // 
             // My_CouponsBtn
             // 
-            this.My_CouponsBtn.Location = new System.Drawing.Point(21, 458);
+            this.My_CouponsBtn.Location = new System.Drawing.Point(152, 426);
             this.My_CouponsBtn.Name = "My_CouponsBtn";
             this.My_CouponsBtn.Size = new System.Drawing.Size(225, 77);
             this.My_CouponsBtn.TabIndex = 3;
@@ -68,7 +68,7 @@
             // 
             // Refill_pesetasBtn
             // 
-            this.Refill_pesetasBtn.Location = new System.Drawing.Point(21, 221);
+            this.Refill_pesetasBtn.Location = new System.Drawing.Point(152, 209);
             this.Refill_pesetasBtn.Name = "Refill_pesetasBtn";
             this.Refill_pesetasBtn.Size = new System.Drawing.Size(225, 73);
             this.Refill_pesetasBtn.TabIndex = 4;
@@ -100,7 +100,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(491, 638);
+            this.ClientSize = new System.Drawing.Size(534, 638);
             this.Controls.Add(this.Pesetas);
             this.Controls.Add(this.Name);
             this.Controls.Add(this.Refill_pesetasBtn);

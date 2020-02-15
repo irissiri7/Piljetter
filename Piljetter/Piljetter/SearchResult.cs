@@ -36,7 +36,7 @@ namespace Piljetter
             var useCoupons = useCouponBox.Checked;
 
             bool success = VendingMachine.BuyTickets(CurrentCustomer, tickets, concert, useCoupons);
-            CurrentCustomer = CustomerHandler.SignIn(CurrentCustomer.Name, CurrentCustomer.Password)[0];
+            CurrentCustomer = CustomerEngine.SignIn(CurrentCustomer.Name, CurrentCustomer.Password)[0];
             if (success)
             {
                 MessageBox.Show("Tickets bought!");

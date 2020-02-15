@@ -39,11 +39,11 @@
             // 
             this.amountLbl.AutoSize = true;
             this.amountLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.amountLbl.Location = new System.Drawing.Point(111, 79);
+            this.amountLbl.Location = new System.Drawing.Point(119, 47);
             this.amountLbl.Name = "amountLbl";
-            this.amountLbl.Size = new System.Drawing.Size(570, 36);
+            this.amountLbl.Size = new System.Drawing.Size(571, 36);
             this.amountLbl.TabIndex = 0;
-            this.amountLbl.Text = "How many pesetas would you like to buy?";
+            this.amountLbl.Text = "How much pesetas would you like to buy?";
             // 
             // numOfPesetasUpDown
             // 
@@ -53,7 +53,7 @@
             0,
             0,
             0});
-            this.numOfPesetasUpDown.Location = new System.Drawing.Point(287, 148);
+            this.numOfPesetasUpDown.Location = new System.Drawing.Point(295, 105);
             this.numOfPesetasUpDown.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -71,7 +71,7 @@
             // buyBtn
             // 
             this.buyBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buyBtn.Location = new System.Drawing.Point(255, 216);
+            this.buyBtn.Location = new System.Drawing.Point(250, 168);
             this.buyBtn.Name = "buyBtn";
             this.buyBtn.Size = new System.Drawing.Size(253, 105);
             this.buyBtn.TabIndex = 2;
@@ -82,7 +82,7 @@
             // backToMyPageBtn
             // 
             this.backToMyPageBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.backToMyPageBtn.Location = new System.Drawing.Point(12, 375);
+            this.backToMyPageBtn.Location = new System.Drawing.Point(12, 312);
             this.backToMyPageBtn.Name = "backToMyPageBtn";
             this.backToMyPageBtn.Size = new System.Drawing.Size(191, 51);
             this.backToMyPageBtn.TabIndex = 3;
@@ -94,7 +94,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 385);
             this.Controls.Add(this.backToMyPageBtn);
             this.Controls.Add(this.buyBtn);
             this.Controls.Add(this.numOfPesetasUpDown);
