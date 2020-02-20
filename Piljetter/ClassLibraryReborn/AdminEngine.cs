@@ -104,31 +104,38 @@ namespace ClassLibrary
         public static bool CancelConcert (string concertId, bool givecoupons)
         {
             bool success = true;
-            string sqlCancelConcert = @"UPDATE Concerts
-                            SET Cancelled = 1
-                            WHERE Id = @id;
-                            WITH x AS
-                            (SELECT Customer_Id, SUM(Num_Tickets) as NumberOfTickets, AVG(Ticket_Price_At_Purchase) TicketPriceAtPurchase
-                            FROM Orders AS o 
-                            WHERE o.Concert_Id = @id GROUP BY o.Customer_Id) 
-                            UPDATE Customers 
-                            SET Pesetas = Pesetas + (x.TicketPriceAtPurchase * x.NumberOfTickets)
-                            FROM Customers AS c
-                            INNER JOIN x AS x
-                            ON x.Customer_Id = c.Id;";
+            string sqlCustomersToRefund = @"SELECT Customer_Id AS CustomerId, SUM(Num_Tickets) AS NumberOfTickets, 
+                                         Ticket_Price_At_Purchase AS TicketPriceAtPurchase 
+                                         FROM Orders AS o WHERE o.Concert_Id = @concertId 
+                                         GROUP BY o.Customer_Id, Ticket_Price_At_Purchase";
+
+            string sqlRefundStatement = @"UPDATE Customers
+                                         SET Pesetas = Pesetas + (@ticketPrice * @numberOfTickets)
+                                          WHERE Id = @customerId";
+
+
+           string sqlCancelConcert = @"UPDATE Concerts
+                                        SET Cancelled = 1
+                                        WHERE Id = @concertId";
+                                       
             try
             {
                 using (var c = new SqlConnection(ConnectionString))
                 {
                     c.Open();
+                    List<CustomerToRefund> customersToRefund = c.Query<CustomerToRefund>(sqlCustomersToRefund, new { @concertId = concertId }).ToList();
                     using (var t = c.BeginTransaction())
                     {
+                        c.Execute(sqlCancelConcert, new { @concertId = concertId }, transaction: t);
                         if (givecoupons)
                         {
                             GiveCoupons(concertId, c, t);
                         }
-
-                        c.Execute(sqlCancelConcert, new { @id = concertId}, transaction: t);
+                        foreach(var customer in customersToRefund)
+                        {
+                            c.Execute(sqlRefundStatement, new {@ticketPrice = customer.TicketPriceAtPurchase, @numberOfTickets = customer.NumberOfTickets, @customerId = customer.CustomerId}, transaction: t);
+                        }
+                        
                         t.Commit();
                     }
                 }

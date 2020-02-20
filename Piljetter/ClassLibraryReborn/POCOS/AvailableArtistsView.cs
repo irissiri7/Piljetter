@@ -6,8 +6,8 @@ namespace ClassLibrary
 {
     public class AvailableArtistsView
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public int Popularity { get; set; }
-        public int Id { get; set; }
     }
 }

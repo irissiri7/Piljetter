@@ -23,8 +23,8 @@ namespace PiljettAdminGUI
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            int artistId = Convert.ToInt32(availableArtistsView.CurrentRow.Cells[2].Value);
-            int sceneId = Convert.ToInt32(availableScenesView.CurrentRow.Cells[2].Value);
+            int artistId = Convert.ToInt32(availableArtistsView.CurrentRow.Cells[0].Value);
+            int sceneId = Convert.ToInt32(availableScenesView.CurrentRow.Cells[0].Value);
             DateTime concertDate = concertDateSelect.Value;
             bool success = false;
             string message;

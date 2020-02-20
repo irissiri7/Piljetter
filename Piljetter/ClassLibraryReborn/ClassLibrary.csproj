@@ -69,6 +69,7 @@
     <Compile Include="POCOS\Customer.cs" />
     <Compile Include="CustomerEngine.cs" />
     <Compile Include="POCOS\ConcertsViewAdmin.cs" />
+    <Compile Include="POCOS\CustomerToRefund.cs" />
     <Compile Include="POCOS\TopArtistView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="POCOS\PurchaseHistoryView.cs" />

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Dapper;
 using ClassLibrary;
 using System.Configuration;
+using System.Threading;
 
 namespace ConsoleApp
 {
@@ -16,28 +17,31 @@ namespace ConsoleApp
 
         static void Main(string[] args)
         {
-            //MakeShitTonOfTicketPurchases();
+            //GenerateRandomArtists();
+            //GenerateRandomLocations();
+            //GenerateRandomScenes();
             //GenerateRandomConcerts();
-            GenerateRandomCustomers();
+            //GenerateRandomCustomers();
+            GenerateRandomTicketPurchases();
+            //GenerateRandomCoupons();
         }
 
-        public static void GenerateRandomCustomers()
+        public static void GenerateRandomArtists()
         {
             Random rdn = new Random();
-            var sqlInsertCustomers = "INSERT INTO Customers(Name, Pesetas, Password) " +
-                "VALUES(@name, 100000, @password);";
+            var sqlInsertArtist = "INSERT INTO Artists(Name, Popularity) " +
+                "VALUES(@name, @popularity);";
 
             using (var c = new SqlConnection(ConnectionString))
             {
                 c.Open();
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 10000; i++)
                 {
                     string name = GenerateRandomString();
-                    string password = GenerateRandomString();
 
                     try
                     {
-                        c.Execute(sqlInsertCustomers, new { @name = name, @password = password });
+                        c.Execute(sqlInsertArtist, new { @name = name, @popularity = rdn.Next(1,6) });
                     }
                     catch (SqlException)
                     {
@@ -45,9 +49,72 @@ namespace ConsoleApp
                     }
                 }
             }
-                Console.WriteLine("All good and done!");
+            Console.WriteLine("All good and done!");
         }
+        
+        public static void GenerateRandomLocations()
+        {
+            Random rdn = new Random();
+            var sqlInsertArtist = "INSERT INTO Location(City, Country) " +
+                "VALUES(@city, @country);";
 
+            using (var c = new SqlConnection(ConnectionString))
+            {
+                c.Open();
+                for (int i = 0; i < 1000; i++)
+                {
+                    string city = GenerateRandomString();
+                    string country = GenerateRandomString();
+
+                    try
+                    {
+                        c.Execute(sqlInsertArtist, new { @city = city, @country = country});
+                    }
+                    catch (SqlException)
+                    {
+                        continue;
+                    }
+                }
+            }
+            Console.WriteLine("All good and done!");
+        }
+        
+        public static void GenerateRandomScenes()
+        {
+            string sqlAvailableLocations = @"SELECT Id FROM Location";
+            
+            string sqlInsertScenes = @"INSERT INTO Scenes(Name, Seats, Renome, Location_Id)
+                                VALUES(@name, @seats, @renome, @location)";
+            Random rdn = new Random();
+
+            int[] seatVariations = { 1000, 2000, 3000, 4000, 5000, 6000, 7000 };
+
+            using (var c = new SqlConnection(ConnectionString))
+            {
+                c.Open();
+                List<int> locationId = c.Query<int>(sqlAvailableLocations).ToList();
+                for(int i = 0; i < 10000; i++)
+                {
+                    string name = GenerateRandomString();
+                    int seats = seatVariations[rdn.Next(0, seatVariations.Count())];
+                    int renome = rdn.Next(1, 6);
+                    int location = sqlAvailableLocations[rdn.Next(0, sqlAvailableLocations.Count())];
+                    try
+
+                    {
+                        c.Execute(sqlInsertScenes, new { @name = name, @seats = seats, @renome = renome, @location = location });
+
+                    }
+                    catch (SqlException e)
+                    {
+                        continue;
+                    }
+
+                }
+
+            }
+        }
+       
         public static void GenerateRandomConcerts()
         {
             var sqlScenes = "SELECT Id FROM Scenes;";
@@ -68,10 +135,10 @@ namespace ConsoleApp
             using (var c = new SqlConnection(ConnectionString))
             {
                 c.Open();
-                List<string> artists = c.Query<string>(sqlArtists).ToList();
-                List<string> scenes = c.Query<string>(sqlScenes).ToList();
+                List<int> artists = c.Query<int>(sqlArtists).ToList();
+                List<int> scenes = c.Query<int>(sqlScenes).ToList();
 
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 10000; i++)
                 {
                     string year = rdn.Next(2020, 2021).ToString();
                     string month = rdn.Next(1, 12).ToString();
@@ -89,11 +156,38 @@ namespace ConsoleApp
                 }
 
                 Console.WriteLine("All good and done!");
-                Console.ReadLine();
+                
             }
         }
+        
+        public static void GenerateRandomCustomers()
+        {
+            Random rdn = new Random();
+            var sqlInsertCustomers = "INSERT INTO Customers(Name, Pesetas, Password) " +
+                "VALUES(@name, 100000, @password);";
 
-        public static void MakeShitTonOfTicketPurchases()
+            using (var c = new SqlConnection(ConnectionString))
+            {
+                c.Open();
+                for (int i = 0; i < 10000; i++)
+                {
+                    string name = GenerateRandomString();
+                    string password = GenerateRandomString();
+
+                    try
+                    {
+                        c.Execute(sqlInsertCustomers, new { @name = name, @password = password });
+                    }
+                    catch (SqlException)
+                    {
+                        continue;
+                    }
+                }
+            }
+                Console.WriteLine("All good and done!");
+        }
+
+        public static void GenerateRandomTicketPurchases()
         {
             var sqlCustomers = "SELECT Id FROM Customers;";
 
@@ -107,11 +201,9 @@ namespace ConsoleApp
                 List<Customer> customers = c.Query<Customer>(sqlCustomers).ToList();
                 List<string> concerts = c.Query<string>(sqlConcerts).ToList();
 
-                for (int i = 0; i < 100; i++)
+                for (int i = 0; i < 10000; i++)
                 {
                     VendingMachine.BuyTickets(customers[rdn.Next(0, customers.Count())], rdn.Next(1, 5), int.Parse((concerts[rdn.Next(0, concerts.Count())])), false);
-                    //VendingMachine.BuyTickets(customers[rdn.Next(0, customers.Count())], rdn.Next(1, 5), 1047);
-
                 }
             }
 
@@ -131,7 +223,7 @@ namespace ConsoleApp
                 c.Open();
                 List<int> customers = c.Query<int>(sqlCustomers).ToList();
                 
-                for (int i = 0; i < 20; i++)
+                for (int i = 0; i < 10000; i++)
                 {
                     string year = rdn.Next(2020, 2025).ToString();
                     string month = rdn.Next(1, 13).ToString();
@@ -161,7 +253,7 @@ namespace ConsoleApp
             string Name = "";
             Name += consonants[r.Next(consonants.Length)].ToUpper();
             Name += vowels[r.Next(vowels.Length)];
-            int b = 2; //b tells how many times a new letter has been added. It's 2 right now because the first two letters are already in the name.
+            int b = 2;
             while (b < len)
             {
                 Name += consonants[r.Next(consonants.Length)];
@@ -174,7 +266,8 @@ namespace ConsoleApp
 
 
         }
-        
+
+
     }
 
 

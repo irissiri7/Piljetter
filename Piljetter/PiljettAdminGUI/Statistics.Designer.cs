@@ -49,7 +49,7 @@
             this.statisticsView.Name = "statisticsView";
             this.statisticsView.RowHeadersWidth = 62;
             this.statisticsView.RowTemplate.Height = 28;
-            this.statisticsView.Size = new System.Drawing.Size(546, 568);
+            this.statisticsView.Size = new System.Drawing.Size(657, 568);
             this.statisticsView.TabIndex = 0;
             // 
             // topArtistsBtn
@@ -146,7 +146,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1060, 689);
+            this.ClientSize = new System.Drawing.Size(1184, 689);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button1);
