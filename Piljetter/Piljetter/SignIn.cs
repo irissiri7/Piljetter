@@ -63,7 +63,7 @@ namespace Piljetter
                 bool couldRegisterNewCustomer = CustomerEngine.RegisterNewCustomer(name, password);
                 if (couldRegisterNewCustomer)
                 {
-                    MessageBox.Show("Login successful");
+                    MessageBox.Show("Registration successful");
                 }
                 else
                 {

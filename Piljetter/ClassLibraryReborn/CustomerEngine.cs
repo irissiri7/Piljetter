@@ -14,11 +14,11 @@ namespace ClassLibrary
         public static List<Customer> SignIn(string name, string password)
         {
             var customer = new List<Customer>();
+            string sql = "SELECT * FROM [Customers] WHERE Name = @name AND Password = @password;";
 
             using (var c = new SqlConnection(ConnectionString))
             {
                 c.Open();
-                string sql = "SELECT * FROM [Customers] WHERE Name = @name AND Password = @password;";
                 customer = c.Query<Customer>(sql, new { @name = name, @password = password }).ToList();
             };
             return customer;
@@ -27,12 +27,12 @@ namespace ClassLibrary
         public static bool RegisterNewCustomer(string name, string password)
         {
             bool sucess = true;
+            string sql = "INSERT INTO Customers(Name, Password) VALUES(@name, @password); ";
             try
             {
                 using (var c = new SqlConnection(ConnectionString))
                 {
                     c.Open();
-                    string sql = "INSERT INTO Customers(Name, Password) VALUES(@name, @password); ";
                     c.Execute(sql, new { @name = name, @password = password });
                 }
 

@@ -16,7 +16,7 @@ namespace PiljettAdminGUI
         public ConcertsOverview()
         {
             InitializeComponent();
-            List<ConcertsViewAdmin> commingConcerts = SearchEngine.SearchCommingConcertsForAdmin(">");
+            List<ConcertsViewAdmin> commingConcerts = SearchEngine.SearchCommingConcertsForAdmin();
             comingConcertsView.DataSource = commingConcerts;
         }
 

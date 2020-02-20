@@ -23,28 +23,21 @@ namespace PiljettAdminGUI
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            int artistId = Convert.ToInt32(Math.Round(artistIdUpDown.Value, 0));
-            int sceneId = Convert.ToInt32(Math.Round(sceneIdUpDown.Value, 0));
+            int artistId = Convert.ToInt32(availableArtistsView.CurrentRow.Cells[2].Value);
+            int sceneId = Convert.ToInt32(availableScenesView.CurrentRow.Cells[2].Value);
             DateTime concertDate = concertDateSelect.Value;
             bool success = false;
+            string message;
 
-            if(artistId == 0 || sceneId == 0)
+            success = AdminEngine.AddConcert(concertDate, sceneId, artistId, out message);
+            if (success)
             {
-                MessageBox.Show("Can' leave any fields empty");
+                MessageBox.Show(message);
             }
             else
             {
-                success = AdminEngine.AddConcert(concertDate, sceneId, artistId);
-                if (success)
-                {
-                    MessageBox.Show("Concert added");
-                }
-                else
-                {
-                    MessageBox.Show("Something went wrong");
-                }
+                MessageBox.Show(message);
             }
-
 
         }
 

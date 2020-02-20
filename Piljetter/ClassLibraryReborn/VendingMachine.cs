@@ -15,35 +15,41 @@ namespace ClassLibrary
         public static bool BuyTickets(Customer customer, int numOfTickets, int concertId, bool useCoupon)
         {
             bool success = true;
+            string sqlGetCouponIds = @"SELECT Id From Coupons 
+                                       WHERE Customer_Id = @customerId AND 
+                                       Used = 0 AND Expiration_Date > GETDATE()";
+         
+            string sqlReinburseCustomerAndDeactivateCoupon = @"UPDATE Customers
+                SET Pesetas = Pesetas + (SELECT Ticket_Price FROM Concerts WHERE Id = @concertId)
+                WHERE Id = @customerId
+                UPDATE Coupons
+                SET Used = 1 WHERE Id = @couponId";
+                
+            string sqlTicketPurchase = @"IF(SELECT Cancelled FROM Concerts WHERE Id = @concertId) = 0
+                                BEGIN
+	                                UPDATE Concerts SET Available_Tickets = Available_Tickets - @numOfTickets
+                                    WHERE Concerts.Id = @concertId; 
+                                    INSERT INTO Orders(Customer_Id, Concert_Id, Num_Tickets, Ticket_Price_At_Purchase) 
+                                    VALUES(@customerId, @concertId, @numOfTickets, (SELECT  Ticket_Price FROM Concerts WHERE Id = @concertId));
+                                    UPDATE Customers SET Pesetas = Pesetas - (@numOfTickets * ( SELECT Ticket_Price FROM Concerts WHERE Id = @concertId))
+                                    WHERE Id = @customerId;
+                                END";
+            
             try
             {
                 using (var c = new SqlConnection(ConnectionString))
                 {
                     c.Open();
-                    using (var t = c.BeginTransaction())
+                    using (var t = c.BeginTransaction(System.Data.IsolationLevel.RepeatableRead))
                     {
-                        var sqlGetCouponIds = "SELECT Id From Coupons WHERE Customer_Id = @customerId AND Used = 0 AND Expiration_Date > GETDATE()";
                         List<int> couponIds = c.Query<int>(sqlGetCouponIds, new { @customerId = customer.Id }, transaction: t).ToList();
                         
                         if (useCoupon && couponIds.Count > 0)
                         {
-                            var sqlReinburseCustomerAndDeactivateCoupon = "UPDATE Customers " +
-                                "SET Pesetas = Pesetas + (SELECT Ticket_Price FROM Concerts WHERE Id = @concertId) " +
-                                "WHERE Id = @customerId " +
-                                "UPDATE Coupons " +
-                                "SET Used = 1 WHERE Id = @couponId";
-                            
                             c.Execute(sqlReinburseCustomerAndDeactivateCoupon, new { @concertId = concertId, @customerId = customer.Id, @couponId = couponIds[0] }, transaction: t);
-
                         }
-                        string sql = "UPDATE Concerts SET Available_Tickets = Available_Tickets - @numOfTickets " +
-                            "WHERE Concerts.Id = @concertId; " +
-                            "UPDATE Customers SET Pesetas = Pesetas - (@numOfTickets * ( SELECT Ticket_Price FROM Concerts WHERE Id = @concertId)) " +
-                            "WHERE Id = @customerId; " +
-                            "INSERT INTO Orders(Customer_Id, Concert_Id, Num_Tickets, Ticket_Price_At_Purchase) " +
-                            "VALUES(@customerId, @concertId, @numOfTickets, (SELECT  Ticket_Price FROM Concerts WHERE Id = @concertId)); ";
 
-                        c.Execute(sql, new { @numOfTickets  = numOfTickets, @concertId = concertId, @customerId = customer.Id }, transaction: t);
+                        c.Execute(sqlTicketPurchase, new { @numOfTickets  = numOfTickets, @concertId = concertId, @customerId = customer.Id }, transaction: t);
                         t.Commit();
                     }
                     
@@ -60,10 +66,10 @@ namespace ClassLibrary
         public static bool BuyPesetas(Customer customer, int amountPesetas)
         {
             bool success = false;
+            string sql = "UPDATE Customers SET Pesetas = Pesetas + @amountPesetas WHERE Id = @Id; ";
             using (var c = new SqlConnection(ConnectionString))
             {
                 c.Open();
-                string sql = "UPDATE Customers SET Pesetas = Pesetas + @amountPesetas WHERE Id = @Id; ";
                 c.Execute(sql, new { @amountPesetas = amountPesetas, @Id = customer.Id});
                 success = true;
             }

@@ -34,34 +34,29 @@
             this.label2 = new System.Windows.Forms.Label();
             this.availableArtistsView = new System.Windows.Forms.DataGridView();
             this.availableScenesView = new System.Windows.Forms.DataGridView();
-            this.artistIdUpDown = new System.Windows.Forms.NumericUpDown();
-            this.sceneIdUpDown = new System.Windows.Forms.NumericUpDown();
             this.concertDateSelect = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.availableArtistsView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.availableScenesView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.artistIdUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sceneIdUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // addBtn
             // 
-            this.addBtn.Location = new System.Drawing.Point(12, 532);
+            this.addBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addBtn.Location = new System.Drawing.Point(736, 473);
             this.addBtn.Name = "addBtn";
-            this.addBtn.Size = new System.Drawing.Size(120, 49);
+            this.addBtn.Size = new System.Drawing.Size(340, 73);
             this.addBtn.TabIndex = 0;
-            this.addBtn.Text = "Add";
+            this.addBtn.Text = "Add concert";
             this.addBtn.UseVisualStyleBackColor = true;
             this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
             // backToMainPage
             // 
-            this.backToMainPage.Location = new System.Drawing.Point(12, 605);
+            this.backToMainPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.backToMainPage.Location = new System.Drawing.Point(736, 564);
             this.backToMainPage.Name = "backToMainPage";
-            this.backToMainPage.Size = new System.Drawing.Size(120, 49);
+            this.backToMainPage.Size = new System.Drawing.Size(340, 79);
             this.backToMainPage.TabIndex = 1;
             this.backToMainPage.Text = "Back to main page";
             this.backToMainPage.UseVisualStyleBackColor = true;
@@ -70,25 +65,27 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(416, 18);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 23);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(119, 20);
+            this.label1.Size = new System.Drawing.Size(127, 25);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Available artists";
+            this.label1.Text = "Choose artist";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(416, 357);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(12, 351);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(127, 20);
+            this.label2.Size = new System.Drawing.Size(139, 25);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Available scenes";
+            this.label2.Text = "Choose scene";
             // 
             // availableArtistsView
             // 
             this.availableArtistsView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.availableArtistsView.Location = new System.Drawing.Point(418, 55);
+            this.availableArtistsView.Location = new System.Drawing.Point(17, 63);
             this.availableArtistsView.Name = "availableArtistsView";
             this.availableArtistsView.RowHeadersWidth = 62;
             this.availableArtistsView.RowTemplate.Height = 28;
@@ -98,79 +95,31 @@
             // availableScenesView
             // 
             this.availableScenesView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.availableScenesView.Location = new System.Drawing.Point(418, 392);
+            this.availableScenesView.Location = new System.Drawing.Point(17, 391);
             this.availableScenesView.Name = "availableScenesView";
             this.availableScenesView.RowHeadersWidth = 62;
             this.availableScenesView.RowTemplate.Height = 28;
             this.availableScenesView.Size = new System.Drawing.Size(680, 252);
             this.availableScenesView.TabIndex = 5;
             // 
-            // artistIdUpDown
-            // 
-            this.artistIdUpDown.Location = new System.Drawing.Point(144, 122);
-            this.artistIdUpDown.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.artistIdUpDown.Name = "artistIdUpDown";
-            this.artistIdUpDown.Size = new System.Drawing.Size(120, 26);
-            this.artistIdUpDown.TabIndex = 6;
-            // 
-            // sceneIdUpDown
-            // 
-            this.sceneIdUpDown.Location = new System.Drawing.Point(144, 194);
-            this.sceneIdUpDown.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.sceneIdUpDown.Name = "sceneIdUpDown";
-            this.sceneIdUpDown.Size = new System.Drawing.Size(120, 26);
-            this.sceneIdUpDown.TabIndex = 7;
-            // 
             // concertDateSelect
             // 
-            this.concertDateSelect.Location = new System.Drawing.Point(144, 258);
+            this.concertDateSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.concertDateSelect.Location = new System.Drawing.Point(736, 107);
+            this.concertDateSelect.MinDate = new System.DateTime(2020, 2, 16, 0, 0, 0, 0);
             this.concertDateSelect.Name = "concertDateSelect";
-            this.concertDateSelect.Size = new System.Drawing.Size(200, 26);
+            this.concertDateSelect.Size = new System.Drawing.Size(261, 30);
             this.concertDateSelect.TabIndex = 8;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(30, 122);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 20);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Artist Id";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(30, 194);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 20);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Scene Id";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(30, 258);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(44, 20);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Date";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(39, 55);
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(731, 63);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(217, 20);
+            this.label6.Size = new System.Drawing.Size(124, 25);
             this.label6.TabIndex = 12;
-            this.label6.Text = "Enter details and press \"Add\"";
+            this.label6.Text = "Choose date";
             // 
             // AddConcert
             // 
@@ -178,12 +127,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1110, 666);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.concertDateSelect);
-            this.Controls.Add(this.sceneIdUpDown);
-            this.Controls.Add(this.artistIdUpDown);
             this.Controls.Add(this.availableScenesView);
             this.Controls.Add(this.availableArtistsView);
             this.Controls.Add(this.label2);
@@ -194,8 +138,6 @@
             this.Text = "AddConcert";
             ((System.ComponentModel.ISupportInitialize)(this.availableArtistsView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.availableScenesView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.artistIdUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sceneIdUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -209,12 +151,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView availableArtistsView;
         private System.Windows.Forms.DataGridView availableScenesView;
-        private System.Windows.Forms.NumericUpDown artistIdUpDown;
-        private System.Windows.Forms.NumericUpDown sceneIdUpDown;
         private System.Windows.Forms.DateTimePicker concertDateSelect;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
     }
 }

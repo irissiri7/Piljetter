@@ -20,9 +20,9 @@ namespace Piljetter
             InitializeComponent();
             CurrentCustomer = currentCustomer;
             dateFrom.CustomFormat = "yyyy-mm-dd";
-            //dateFrom.Format = DateTimePickerFormat.Custom;
             dateTo.CustomFormat = "yyyy-mm-dd";
-            //dateTo.Format = DateTimePickerFormat.Custom;
+            dateFrom.MinDate = DateTime.Today;
+            dateTo.MinDate = DateTime.Today;
         }
 
         private void searchBtn_Click(object sender, EventArgs e)

@@ -16,11 +16,11 @@ namespace ClassLibrary
 
         public static List<AvailableArtistsView> GetAvailableArtists()
         {
+            string sql = @"SELECT * FROM Artists";
             
             using (var c = new SqlConnection(ConnectionString))
             {
                 c.Open();
-                string sql = "SELECT Name, Popularity, Id FROM Artists; ";
                 List<AvailableArtistsView> result = c.Query<AvailableArtistsView>(sql).ToList();
                 return result;
             }
@@ -29,20 +29,93 @@ namespace ClassLibrary
 
         public static List<AvailableScenesView> GetAvailableScenes()
         {
+            string sql = @"SELECT s.Id, s.Name, l.City, s.Renome, s.Seats 
+                            FROM Scenes AS s
+                            INNER JOIN Location AS l ON s.Location_Id = l.Id;";
 
             using (var c = new SqlConnection(ConnectionString))
             {
                 c.Open();
-                string sql = "SELECT Name, Renome, Id FROM Scenes; ";
                 List<AvailableScenesView> result = c.Query<AvailableScenesView>(sql).ToList();
                 return result;
             }
 
         }
 
-        public static bool AddConcert(DateTime time, int sceneId, int artistId)
+        public static bool AddConcert(DateTime time, int sceneId, int artistId, out string message)
         {
             bool success = true;
+            message = "Concert added!";
+            
+            string sqlAddConcert = @"INSERT INTO Concerts(Time, Scene_Id, Artist_Id, Ticket_Price, Available_Tickets, Total_Cost)
+                VALUES(@time, @sceneId, @artistId,
+                (SELECT SUM(Popularity) * (100) FROM Artists as a WHERE a.Id = @artistId),
+                (SELECT Seats FROM Scenes WHERE Scenes.Id = @sceneId),
+                (SELECT(SELECT SUM(Renome) FROM Scenes AS s WHERE s.Id = @sceneId) * (SELECT SUM(Popularity) * (10000) FROM Artists as a WHERE a.Id = @artistId))); ";
+            
+            try
+            {
+                using (var c = new SqlConnection(ConnectionString))
+                {
+                    c.Open();
+                    bool sceneAlreadyBooked = CheckIfSceneIsAlreadyBookedThatDate(time, sceneId);
+                    bool artistAlreadyBooked = CheckIfArtistIsAlreadyBookedThatDate(time, artistId);
+                    if (artistAlreadyBooked)
+                    {
+                        message = "Artist already booked on that date";
+                        throw new InvalidOperationException();
+
+                    }
+                    else if (sceneAlreadyBooked)
+                    {
+                        message = "Scene already booked on that date";
+                        throw new InvalidOperationException();
+
+                    }
+                    else
+                    {
+                        using (var t = c.BeginTransaction())
+                        {
+
+                            c.Execute(sqlAddConcert, new { @time = time, @sceneId = sceneId, @artistId = artistId }, transaction: t);
+                            t.Commit();
+                        }
+
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                success = false;
+                if(e is SqlException || e is InvalidOperationException)
+                {
+                    return success;
+                }
+                else
+                {
+                    message = "Unknown error";
+                    throw;
+                }
+            }
+
+            return success;
+        }
+
+        public static bool CancelConcert (string concertId, bool givecoupons)
+        {
+            bool success = true;
+            string sqlCancelConcert = @"UPDATE Concerts
+                            SET Cancelled = 1
+                            WHERE Id = @id;
+                            WITH x AS
+                            (SELECT Customer_Id, SUM(Num_Tickets) as NumberOfTickets, AVG(Ticket_Price_At_Purchase) TicketPriceAtPurchase
+                            FROM Orders AS o 
+                            WHERE o.Concert_Id = @id GROUP BY o.Customer_Id) 
+                            UPDATE Customers 
+                            SET Pesetas = Pesetas + (x.TicketPriceAtPurchase * x.NumberOfTickets)
+                            FROM Customers AS c
+                            INNER JOIN x AS x
+                            ON x.Customer_Id = c.Id;";
             try
             {
                 using (var c = new SqlConnection(ConnectionString))
@@ -50,54 +123,12 @@ namespace ClassLibrary
                     c.Open();
                     using (var t = c.BeginTransaction())
                     {
-                        string sql = "INSERT INTO Concerts(Time, Scene_Id, Artist_Id, Ticket_Price, Available_Tickets, Total_Cost) " +
-                            "VALUES(@time, @sceneId, @artistId, " +
-                            "(SELECT SUM(Popularity) * (100) FROM Artists as a WHERE a.Id = @artistId), " +
-                            "(SELECT Seats FROM Scenes WHERE Scenes.Id = @sceneId), " +
-                            "(SELECT(SELECT SUM(Renome) FROM Scenes AS s WHERE s.Id = @sceneId) * (SELECT SUM(Popularity) * (10000) FROM Artists as a WHERE a.Id = @artistId))); ";
+                        if (givecoupons)
+                        {
+                            GiveCoupons(concertId, c, t);
+                        }
 
-                        c.Execute(sql, new { @time = time, @sceneId = sceneId, @artistId = artistId }, transaction: t);
-                        t.Commit();
-                    }
-
-                }
-            }
-            catch (SqlException e)
-            {
-                success = false;
-            }
-
-            return success;
-        }
-
-        public static bool CancelConcert (string id, bool givecoupons)
-        {
-            bool success = true;
-            if (givecoupons)
-            {
-                GiveCoupons(id);
-            }
-            try
-            {
-                using (var c = new SqlConnection(ConnectionString))
-                {
-                    c.Open();
-                    using (var t = c.BeginTransaction())
-                    {
-                        string sql = "WITH x AS " +
-                            "(SELECT Customer_Id, SUM(Num_Tickets) as NumberOfTickets, AVG(Ticket_Price_At_Purchase) TicketPriceAtPurchase " +
-                            "FROM Orders AS o " +
-                            "WHERE o.Concert_Id = @id GROUP BY o.Customer_Id) " +
-                            "UPDATE Customers " +
-                            "SET Pesetas = Pesetas + (x.TicketPriceAtPurchase * x.NumberOfTickets) " +
-                            "FROM Customers AS c " +
-                            "INNER JOIN x AS x " +
-                            "ON x.Customer_Id = c.Id; " +
-                            "UPDATE Concerts " +
-                            "SET Cancelled = 1 " +
-                            "WHERE Id = @id";
-
-                        c.Execute(sql, new { @id = id}, transaction: t);
+                        c.Execute(sqlCancelConcert, new { @id = concertId}, transaction: t);
                         t.Commit();
                     }
                 }
@@ -111,24 +142,20 @@ namespace ClassLibrary
             return success;
         }
 
-        public static void GiveCoupons(string concertId)
+        public static void GiveCoupons(string concertId, SqlConnection con, SqlTransaction tran)
         {
-            var sql1 = "SELECT DISTINCT o.Customer_Id FROM Concerts AS c " +
-                        "INNER JOIN Orders AS o ON c.Id = o.Concert_Id " +
-                        "WHERE Concert_Id = @concertId;";  
+            var sqlCustomers = @"SELECT DISTINCT Customer_Id 
+                                FROM Orders
+                                WHERE Concert_Id = @concertId;";  
             
-            var sql2 = "INSERT INTO Coupons(Customer_Id, Expiration_Date) " +
-                       "VALUES(@id, DATEADD(year, 1, GETDATE()));";
+            var sqlInsertCoupons = @"INSERT INTO Coupons(Customer_Id, Expiration_Date)
+                                    VALUES(@id, DATEADD(year, 1, GETDATE()));";
             
-            using (var c = new SqlConnection(ConnectionString))
-            {
-                List<int> customerId= c.Query<int>(sql1, new { @concertId = concertId }).ToList();
+                List<int> customerId= con.Query<int>(sqlCustomers, new { @concertId = concertId }, tran).ToList();
                 foreach (int id in customerId)
                 {
-                    c.Execute(sql2, new { @id = id });
+                    con.Execute(sqlInsertCoupons, new { @id = id }, tran);
                 }
-            }
-
         }
 
         public static List<TopArtistView> FindTopTenArtists(DateTime from, DateTime to)
@@ -136,14 +163,14 @@ namespace ClassLibrary
             using(var c = new SqlConnection(ConnectionString))
             {
                 c.Open();
-                var sql = "SELECT TOP 10 o.Concert_Id AS ConcertId, a.Name AS Artist, s.Name AS Scene, c.Time, CAST(ROUND(((SUM(Num_Tickets)*100.0) / s.Seats), 0) AS int) AS PercentageSoldOut " +
-                    "FROM Orders AS o " +
-                    "INNER JOIN Concerts AS c ON o.Concert_Id = c.Id " +
-                    "INNER JOIN Artists AS a ON a.Id = c.Artist_Id " +
-                    "INNER JOIN Scenes AS s ON c.Scene_Id = s.Id " +
-                    "WHERE c.Cancelled = 0 AND c.Time BETWEEN @from AND @to " +
-                    "GROUP BY a.Name, c.Time, Concert_Id, s.Seats, s.Name " +
-                    "Order BY PercentageSoldOut DESC";
+                var sql = @"SELECT TOP 10 o.Concert_Id AS ConcertId, a.Name AS Artist, s.Name AS Scene, c.Time, CAST(ROUND(((SUM(Num_Tickets)*100.0) / s.Seats), 0) AS int) AS PercentageSoldOut
+                    FROM Orders AS o
+                    INNER JOIN Concerts AS c ON o.Concert_Id = c.Id
+                    INNER JOIN Artists AS a ON a.Id = c.Artist_Id 
+                    INNER JOIN Scenes AS s ON c.Scene_Id = s.Id 
+                    WHERE c.Cancelled = 0 AND c.Time BETWEEN @from AND @to 
+                    GROUP BY a.Name, c.Time, Concert_Id, s.Seats, s.Name 
+                    Order BY PercentageSoldOut DESC";
 
                 List<TopArtistView> topArtistList = c.Query<TopArtistView>(sql, new { @from = from, @to = to }).ToList();
 
@@ -156,33 +183,67 @@ namespace ClassLibrary
             using (var c = new SqlConnection(ConnectionString))
             {
                 c.Open();
-                var sql = "SELECT DATEPART(YEAR FROM Expiration_Date) AS Year, ExpirationMonth, COUNT(*) NumberOfCoupons FROM ( " +
-                    "SELECT *, " +
-                    "CASE " +
-                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 1 THEN 'January' " +
-                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 2 THEN 'February' " +
-                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 3 THEN 'March' " +
-                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 4 THEN 'April' " +
-                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 5 THEN 'May' " +
-                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 6 THEN 'June' " +
-                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 7 THEN 'July' " +
-                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 8 THEN 'August' " +
-                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 9 THEN 'September' " +
-                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 10 THEN 'October' " +
-                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 11 THEN 'November' " +
-                    "WHEN DATEPART(MONTH FROM Expiration_Date) = 12 THEN 'December' " +
-                    "Else 'Unknown' " +
-                   "END AS 'ExpirationMonth' " +
-                   "FROM Coupons " +
-                   "WHERE Expiration_Date >= GETDATE() " +
-                   ") x " +
-                   "GROUP BY DATEPART(YEAR FROM Expiration_Date), DATEPART(MONTH FROM Expiration_Date), ExpirationMonth " +
-                   "ORDER BY DATEPART(YEAR FROM Expiration_Date), DATEPART(MONTH FROM Expiration_Date)";
+                var sql = @"SELECT DATEPART(YEAR FROM Expiration_Date) AS Year, ExpirationMonth, COUNT(*) NumberOfCoupons FROM (
+                    SELECT *,
+                    CASE
+                    WHEN DATEPART(MONTH FROM Expiration_Date) = 1 THEN 'January'
+                    WHEN DATEPART(MONTH FROM Expiration_Date) = 2 THEN 'February'
+                    WHEN DATEPART(MONTH FROM Expiration_Date) = 3 THEN 'March'
+                    WHEN DATEPART(MONTH FROM Expiration_Date) = 4 THEN 'April'
+                    WHEN DATEPART(MONTH FROM Expiration_Date) = 5 THEN 'May'
+                    WHEN DATEPART(MONTH FROM Expiration_Date) = 6 THEN 'June'
+                    WHEN DATEPART(MONTH FROM Expiration_Date) = 7 THEN 'July'
+                    WHEN DATEPART(MONTH FROM Expiration_Date) = 8 THEN 'August'
+                    WHEN DATEPART(MONTH FROM Expiration_Date) = 9 THEN 'September'
+                    WHEN DATEPART(MONTH FROM Expiration_Date) = 10 THEN 'October'
+                    WHEN DATEPART(MONTH FROM Expiration_Date) = 11 THEN 'November'
+                    WHEN DATEPART(MONTH FROM Expiration_Date) = 12 THEN 'December'
+                    Else 'Unknown'
+                   END AS 'ExpirationMonth'
+                   FROM Coupons
+                   WHERE Expiration_Date >= GETDATE() AND Used = 0
+                   ) x 
+                   GROUP BY DATEPART(YEAR FROM Expiration_Date), DATEPART(MONTH FROM Expiration_Date), ExpirationMonth
+                   ORDER BY DATEPART(YEAR FROM Expiration_Date), DATEPART(MONTH FROM Expiration_Date)";
 
                 List<CouponInfoAdmin> couponSummery = c.Query<CouponInfoAdmin>(sql).ToList();
 
                 return couponSummery;
             }
+        }
+
+        public static bool CheckIfArtistIsAlreadyBookedThatDate(DateTime time, int artistId)
+        {
+            bool result = false;
+            using(var cn = new SqlConnection(ConnectionString))
+            {
+                cn.Open();
+                var sql = "SELECT Artist_Id FROM Concerts WHERE Time = @time AND Artist_Id = @artistId AND Cancelled = 0";
+                
+                List<int> artistAlreadyBooked = cn.Query<int>(sql, new { @time = time.ToString("yyyy/MM/dd"), @artistId = artistId }).ToList();
+                if(artistAlreadyBooked.Count > 0)
+                {
+                    result = true;
+                }
+            }
+            return result;
+        }
+
+        public static bool CheckIfSceneIsAlreadyBookedThatDate(DateTime time, int sceneId)
+        {
+            bool result = false;
+            using (var cn = new SqlConnection(ConnectionString))
+            {
+                cn.Open();
+                var sql = "SELECT Scene_Id FROM Concerts WHERE Time = @time AND scene_Id = @sceneId AND Cancelled = 0";
+
+                List<int> artistAlreadyBooked = cn.Query<int>(sql, new { @time = time.ToString("yyyy/MM/dd"), @sceneId = sceneId }).ToList();
+                if (artistAlreadyBooked.Count > 0)
+                {
+                    result = true;
+                }
+            }
+            return result;
         }
     }
 }

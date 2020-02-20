@@ -49,7 +49,7 @@
             // 
             // cancelConcertBtn
             // 
-            this.cancelConcertBtn.Location = new System.Drawing.Point(12, 501);
+            this.cancelConcertBtn.Location = new System.Drawing.Point(12, 523);
             this.cancelConcertBtn.Name = "cancelConcertBtn";
             this.cancelConcertBtn.Size = new System.Drawing.Size(154, 69);
             this.cancelConcertBtn.TabIndex = 1;
@@ -60,7 +60,7 @@
             // couponsCheckBox
             // 
             this.couponsCheckBox.AutoSize = true;
-            this.couponsCheckBox.Location = new System.Drawing.Point(186, 546);
+            this.couponsCheckBox.Location = new System.Drawing.Point(184, 546);
             this.couponsCheckBox.Name = "couponsCheckBox";
             this.couponsCheckBox.Size = new System.Drawing.Size(137, 24);
             this.couponsCheckBox.TabIndex = 2;
@@ -82,16 +82,16 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(14, 478);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(901, 20);
+            this.label2.Size = new System.Drawing.Size(892, 20);
             this.label2.TabIndex = 4;
             this.label2.Text = "Select the concert you wish to cancel from the table and press \'Cancel concert\'. " +
-    "Don\'t forget to grant coupons if its short notice!";
+    "Don\'t forget to give coupons if its short notice!";
             // 
             // backToStartBtn
             // 
-            this.backToStartBtn.Location = new System.Drawing.Point(18, 587);
+            this.backToStartBtn.Location = new System.Drawing.Point(12, 623);
             this.backToStartBtn.Name = "backToStartBtn";
-            this.backToStartBtn.Size = new System.Drawing.Size(148, 72);
+            this.backToStartBtn.Size = new System.Drawing.Size(154, 72);
             this.backToStartBtn.TabIndex = 5;
             this.backToStartBtn.Text = "Back to start";
             this.backToStartBtn.UseVisualStyleBackColor = true;
@@ -101,7 +101,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1313, 671);
+            this.ClientSize = new System.Drawing.Size(1313, 707);
             this.Controls.Add(this.backToStartBtn);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);

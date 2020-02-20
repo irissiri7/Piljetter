@@ -12,14 +12,13 @@ namespace ConsoleApp
 {
     class Program
     {
-        private static string ConnectionString { get; set; } = @"Data Source=MS713826\SQLEXPRESS;Initial Catalog=PiljettDb;Integrated Security=True";
+        private static string ConnectionString { get; set; } = ConfigurationManager.ConnectionStrings["connection"].ConnectionString;
 
         static void Main(string[] args)
         {
-            var connection = ConfigurationManager.ConnectionStrings["connection"].ConnectionString;
-            //GenerateShitTonOfConcerts();
             //MakeShitTonOfTicketPurchases();
-            Console.WriteLine("hello");
+            //GenerateRandomConcerts();
+            GenerateRandomCustomers();
         }
 
         public static void GenerateRandomCustomers()
@@ -31,7 +30,7 @@ namespace ConsoleApp
             using (var c = new SqlConnection(ConnectionString))
             {
                 c.Open();
-                for (int i = 0; i < 10000; i++)
+                for (int i = 0; i < 10; i++)
                 {
                     string name = GenerateRandomString();
                     string password = GenerateRandomString();
@@ -49,29 +48,7 @@ namespace ConsoleApp
                 Console.WriteLine("All good and done!");
         }
 
-        public static string GenerateRandomString(int len = 5)
-        {
-            Random r = new Random();
-            string[] consonants = { "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "l", "n", "p", "q", "r", "s", "sh", "zh", "t", "v", "w", "x" };
-            string[] vowels = { "a", "e", "i", "o", "u", "ae", "y" };
-            string Name = "";
-            Name += consonants[r.Next(consonants.Length)].ToUpper();
-            Name += vowels[r.Next(vowels.Length)];
-            int b = 2; //b tells how many times a new letter has been added. It's 2 right now because the first two letters are already in the name.
-            while (b < len)
-            {
-                Name += consonants[r.Next(consonants.Length)];
-                b++;
-                Name += vowels[r.Next(vowels.Length)];
-                b++;
-            }
-
-            return Name;
-
-
-        }
-
-        public static void GenerateShitTonOfConcerts()
+        public static void GenerateRandomConcerts()
         {
             var sqlScenes = "SELECT Id FROM Scenes;";
 
@@ -96,7 +73,7 @@ namespace ConsoleApp
 
                 for (int i = 0; i < 10; i++)
                 {
-                    string year = rdn.Next(2020, 2025).ToString();
+                    string year = rdn.Next(2020, 2021).ToString();
                     string month = rdn.Next(1, 12).ToString();
                     string day = rdn.Next(13, 31).ToString();
                     string randomDate = year + "-" + month + "-" + day;
@@ -105,14 +82,14 @@ namespace ConsoleApp
                     {
                         c.Execute(sqlInsertConcert, new { @random = randomDate, @randomArtist = artists[rdn.Next(0, artists.Count())], @randomScene = scenes[rdn.Next(0, scenes.Count())] });
                     }
-                    catch (SqlException)
+                    catch (SqlException e)
                     {
-                        Console.WriteLine("Collision");
                         continue;
                     }
                 }
 
                 Console.WriteLine("All good and done!");
+                Console.ReadLine();
             }
         }
 
@@ -146,6 +123,7 @@ namespace ConsoleApp
             var sqlCustomers = "SELECT Id FROM Customers;";
             var sqlInsertCoupons = "INSERT INTO Coupons(Customer_Id, Expiration_Date) " +
                 "VALUES(@id, @date); ";
+            
             Random rdn = new Random();
 
             using (var c = new SqlConnection(ConnectionString))
@@ -153,7 +131,7 @@ namespace ConsoleApp
                 c.Open();
                 List<int> customers = c.Query<int>(sqlCustomers).ToList();
                 
-                for (int i = 0; i < 1000; i++)
+                for (int i = 0; i < 20; i++)
                 {
                     string year = rdn.Next(2020, 2025).ToString();
                     string month = rdn.Next(1, 13).ToString();
@@ -175,10 +153,32 @@ namespace ConsoleApp
             }
         }
 
+        public static string GenerateRandomString(int len = 5)
+        {
+            Random r = new Random();
+            string[] consonants = { "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "l", "n", "p", "q", "r", "s", "sh", "zh", "t", "v", "w", "x" };
+            string[] vowels = { "a", "e", "i", "o", "u", "ae", "y" };
+            string Name = "";
+            Name += consonants[r.Next(consonants.Length)].ToUpper();
+            Name += vowels[r.Next(vowels.Length)];
+            int b = 2; //b tells how many times a new letter has been added. It's 2 right now because the first two letters are already in the name.
+            while (b < len)
+            {
+                Name += consonants[r.Next(consonants.Length)];
+                b++;
+                Name += vowels[r.Next(vowels.Length)];
+                b++;
+            }
+
+            return Name;
+
+
         }
-
-
+        
     }
+
+
+}
 
 
 
